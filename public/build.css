@@ -106,6 +106,7 @@ input {
   background-size: 120%;
   background-image: url("assets/image/ui_arrow.svg");
   top: 50%;
+  display: none;
   background-position: center 45%;
   margin-top: -150px;
 }
@@ -161,7 +162,7 @@ input {
   -ms-transition-duration: 0;
   transition-duration: 0;
 }
-.multi-sequencer:not(.playing ) .playhead,
+/* .multi-sequencer:not(.playing ) .playhead,
 .suspended .playhead {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -301,4 +302,4 @@ input {
   -o-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-}
+} */

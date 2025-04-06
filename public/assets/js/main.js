@@ -320,7 +320,8 @@
         if ( carousel.activeChildIndex < carousel.children.length - 1 ) {
             var wasPlaying = multiSequencer.playing;//Tone.Transport.state === Tone.State.Started;
             if (wasPlaying) multiSequencer.pause( );
-            carousel.next();
+            //Remove Next
+            // carousel.next();
             multiSequencer.setActiveSequencer( multiSequencer.sequencers[ carousel.activeChildIndex ] );
             if (wasPlaying) {
                 setTimeout( function( ) {

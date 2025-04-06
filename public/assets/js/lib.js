@@ -1414,6 +1414,8 @@ musicbox.Sequencer.prototype.buildDom = function( opts ) {
     // lil hacky, set by multisequencer
     this.active = true;
 
+    
+
     aaf.common.pointer.on( 'drag', function( x, y ) {
         
         if ( !this.active ) return;
