@@ -1,21 +1,18 @@
 {
   "name": "rhythm-service",
   "version": "1.0.0",
-  "description": "Rhythm generation backend service",
-  "main": "server.js",
+  "main": "main.js",
   "scripts": {
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js",
-    "build": "echo \"No build step for Express\""
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
-  },
-  "devDependencies": {
+    "express": "^5.1.0",
     "nodemon": "^3.1.9"
   }
 }
