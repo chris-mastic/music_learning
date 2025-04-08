@@ -198,7 +198,7 @@
       dropZonesContainer.appendChild(dropZone);
     }
 
-    document.body.appendChild(dropZonesContainer);
+    multiSequencer.domElement.appendChild(dropZonesContainer);
 
     // Create animal container
     const animalContainer = document.createElement("div");
@@ -235,7 +235,7 @@
 
     animalContainer.appendChild(createAnimal("ff", "assets/image/pp.svg"));
 
-    document.body.appendChild(animalContainer);
+    multiSequencer.domElement.appendChild(animalContainer);
 
     // Get going!
     // -------------------------------

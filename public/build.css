@@ -183,13 +183,12 @@ input {
 .drop-container {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  background-color: #d3282a;
+  gap: 30px;
+  margin-top: 20px;
 }
 .animal {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border: 2px solid black;
   display: flex;
   align-items: center;
@@ -203,8 +202,8 @@ input {
   pointer-events: none; /* Prevent image from interfering with drag */
 }
 .drop-zone {
-  width: 120px;
-  height: 120px;
+  width: 70px;
+  height: 70px;
   border: 2px dashed black;
   display: flex;
   align-items: center;
