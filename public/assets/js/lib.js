@@ -634,7 +634,7 @@ musicbox.CharacterEyes = function () {
 
     set: function (b) {
       blink = b;
-      // this.mask.scale.y = blink;       // Remove blink
+      this.mask.scale.y = blink; // Remove blink
     },
   });
 
@@ -682,22 +682,42 @@ musicbox.CharacterPair = function (charBig) {
 
   //Remove Adoring
 
-  // this.adoringLookTimeline = new TimelineMax( {
+  //   this.adoringLookTimeline = new TimelineMax({
   //     onComplete: this.onAdoringLookComplete,
-  //     onCompleteScope: this
-  // } );
+  //     onCompleteScope: this,
+  //   });
 
-  // if ( aaf.common.url.look ) {
-  //     this.adoringLookTimeline.delay( 1 );
-  // } else {
-  //     this.adoringLookTimeline.delay( 5 );
-  // }
+  //   if (aaf.common.url.look) {
+  //     this.adoringLookTimeline.delay(1);
+  //   } else {
+  //     this.adoringLookTimeline.delay(5);
+  //   }
 
-  // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.2, { x: 25 * 2, y: 9 * 2, ease: Quad.inOut }, 0 );
-  // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
+  //   this.adoringLookTimeline.to(
+  //     this.characterBig.lookDirection,
+  //     1.2,
+  //     { x: 25 * 2, y: 9 * 2, ease: Quad.inOut },
+  //     0
+  //   );
+  //   this.adoringLookTimeline.to(
+  //     this.characterBig.lookDirection,
+  //     1.0,
+  //     { x: 0, y: 0, ease: Quad.inOut },
+  //     3.0
+  //   );
 
-  // this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: -20 * 2, y: -5 * 2, ease: Quad.inOut }, 0 );
-  // this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
+  //   this.adoringLookTimeline.to(
+  //     this.characterSmall.lookDirection,
+  //     1.0,
+  //     { x: -20 * 2, y: -5 * 2, ease: Quad.inOut },
+  //     0
+  //   );
+  //   this.adoringLookTimeline.to(
+  //     this.characterSmall.lookDirection,
+  //     1.0,
+  //     { x: 0, y: 0, ease: Quad.inOut },
+  //     3.0
+  //   );
 };
 
 musicbox.CharacterPair.prototype.onAdoringLookComplete = function () {
@@ -790,7 +810,7 @@ musicbox.MultiSequencer = function (sequencers) {
     var sequencer = sequencers[i];
     sequencer.active = false;
     this.sequencers.push(sequencer);
-    this.domElement.appendChild(sequencer.domElement);
+    // this.domElement.appendChild(sequencer.domElement);
   }
 
   this.setActiveSequencer(this.sequencers[0]);
