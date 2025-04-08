@@ -63,6 +63,18 @@ input {
   left: 0;
   background: url("assets/image/ui_menu.svg") center center no-repeat;
 }
+.blinking {
+  animation: blink 0.5s alternate infinite;
+}
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
 .puck-button {
   /* Modify button 60px */
   height: 80px;
@@ -185,6 +197,10 @@ input {
   justify-content: center;
   gap: 30px;
   margin-top: 20px;
+}
+.blinking {
+  animation: blink 0.5s alternate infinite;
+  /* opacity: 0.5; */
 }
 .animal {
   width: 60px;

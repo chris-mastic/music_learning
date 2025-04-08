@@ -5,6 +5,9 @@ musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 
+let sequence = [null, null, null, null];
+let isStart = 0;
+
 musicbox.Animation = function (data, framerate) {
   this.data = data;
   this.duration = data.duration / 1000;
@@ -135,6 +138,7 @@ musicbox.Carousel.prototype.update = function () {
     this.container.position.x += delta * this.easing;
   }
 };
+
 musicbox.Character = function (opts) {
   aaf.utils.Events.mixTo(this);
 
@@ -822,7 +826,6 @@ musicbox.MultiSequencer = function (sequencers) {
     this.playPause,
     function () {
       // ios needs Transport.start() in a touch event.
-
       if (!this.transportStarted) {
         this.transportStarted = true;
         Tone.Transport.swing = aaf.common.url.number("swing", 0.0);
@@ -833,6 +836,10 @@ musicbox.MultiSequencer = function (sequencers) {
       }
 
       this.playing ? this.pause() : this.play();
+      if (!this.playing) {
+        initInterval();
+        isStart = 0;
+      }
     }.bind(this)
   );
 
@@ -1028,7 +1035,10 @@ musicbox.Sequencer = function (opts) {
 
   this.onInterval = this.onInterval.bind(this);
 
+  //   this.onBlinking = this.onBlinking.bind(this);
+
   this.stepNumber = 0;
+  this.loopNumber = 0;
   this.dragOperation = true;
 
   this.sampler = new Tone.PolySynth(1, Tone.Sampler, samplePaths, synthParams);
@@ -1055,6 +1065,7 @@ musicbox.Sequencer.USE_CSS_TRANSITIONS = aaf.common.url.boolean(
 musicbox.Sequencer.prototype.start = function () {
   // hack: belongs in resize. sequencer-padding-horizontal * 2 = 40
   // defined in sequencer.styl
+
   this.sequencerInnerWidth = this.domElement.offsetWidth - 40;
 
   this.stepNumber = 0;
@@ -1114,7 +1125,9 @@ musicbox.Sequencer.prototype.animateNote = function (track, beat) {
 };
 
 musicbox.Sequencer.prototype.onInterval = function (time) {
-  if (!this.playing) return;
+  if (!this.playing) {
+    return;
+  }
 
   // see if there's any active beats at this step number
   var millis = (time - Tone.Transport.currentTime) * 1000;
@@ -1134,12 +1147,38 @@ musicbox.Sequencer.prototype.onInterval = function (time) {
       listener(0.1);
     }
   }
-
+  if (isStart == 0) {
+    this.stepNumber = 0;
+    this.loopNumber = 0;
+    isStart = 1;
+  }
   // advance step number
-
   this.stepNumber++;
+
+  if (this.stepNumber % this.beats == 1) {
+    onBlinking(this.loopNumber);
+    this.loopNumber++;
+    console.log("blink", this.stepNumber);
+  }
   this.stepNumber %= this.beats;
 };
+
+function initInterval() {
+  console.log("paused");
+  this.stepNumber = 0;
+  this.loopNumber = 0;
+  let zones = document.querySelectorAll(".drop-zone");
+  zones.forEach((zone) => zone.classList.remove("blinking"));
+}
+
+function onBlinking(number) {
+  console.log("onBlinking", number);
+  let zones = document.querySelectorAll(".drop-zone");
+  zones.forEach((zone) => zone.classList.remove("blinking"));
+  zones[number % 4].classList.add("blinking");
+
+  // Show animation image
+}
 
 // UI
 // -------------------------------

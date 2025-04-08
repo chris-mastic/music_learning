@@ -1,11 +1,5 @@
 (function () {
-  var pixi,
-    carousel,
-    multiSequencer,
-    animalBox,
-    pairs,
-    characterContainer,
-    scale;
+  var pixi, carousel, multiSequencer, pairs, characterContainer, scale;
 
   // Preload assets
   // -------------------------------
@@ -33,6 +27,8 @@
     "image/ui_woodblocks2.svg",
     "image/ui_woodblocks3.svg",
   ];
+
+  var sequence = [];
 
   var charAssets = [];
 
@@ -165,6 +161,7 @@
     for (let i = 0; i < 4; i++) {
       const dropZone = document.createElement("div");
       dropZone.className = "drop-zone";
+      dropZone.setAttribute("data-index", 0);
 
       //Add event listners
       dropZone.addEventListener("dragover", (event) => {
@@ -185,10 +182,12 @@
           animalClone.removeAttribute("id");
           animalClone.draggable = false;
           animalClone.style.cursor = "default";
+          dIndex = animalClone.getAttribute("data-index");
+          dropZone.setAttribute("data-index", dIndex);
           dropZone.appendChild(animalClone);
 
           // Update the sequence
-          const index = parseInt(dropZone.getaTTRIBUTE("data-index"));
+          const index = parseInt(dropZone.getAttribute("data-index"));
           sequence[index] = {
             id: animalId,
           };
@@ -205,9 +204,10 @@
     animalContainer.className = "drop-container";
 
     // Create animal elements
-    const createAnimal = (id, imgSrc) => {
+    const createAnimal = (id, dataIndex, imgSrc) => {
       const animal = document.createElement("div");
       animal.className = "animal";
+      animal.setAttribute("data-index", dataIndex);
       animal.draggable = true;
       animal.id = id;
 
@@ -223,17 +223,17 @@
       return animal;
     };
 
-    animalContainer.appendChild(createAnimal("pp", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("pp", 1, "assets/image/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("p", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("p", 2, "assets/image/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("mp", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("mp", 3, "assets/image/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("mf", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("mf", 4, "assets/image/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("f", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("f", 5, "assets/image/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("ff", "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("ff", 6, "assets/image/pp.svg"));
 
     multiSequencer.domElement.appendChild(animalContainer);
 
