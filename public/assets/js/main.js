@@ -166,6 +166,11 @@
       //Add event listners
       dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
+        dropZone.classList.add("hovered");
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("hovered");
       });
 
       dropZone.addEventListener("drop", (event) => {
@@ -182,6 +187,7 @@
           animalClone.removeAttribute("id");
           animalClone.draggable = false;
           animalClone.style.cursor = "default";
+          animalClone.classList.remove("dragging");
           dIndex = animalClone.getAttribute("data-index");
           dropZone.setAttribute("data-index", dIndex);
           dropZone.appendChild(animalClone);
@@ -192,6 +198,7 @@
             id: animalId,
           };
         }
+        dropZone.classList.remove("hovered");
       });
 
       dropZonesContainer.appendChild(dropZone);
@@ -218,22 +225,27 @@
       //Add drag
       animal.addEventListener("dragstart", (event) => {
         event.dataTransfer.setData("text/plain", id);
+        animal.classList.add("dragging");
+      });
+
+      animal.addEventListener("dragend", () => {
+        animal.classList.remove("dragging");
       });
 
       return animal;
     };
 
-    animalContainer.appendChild(createAnimal("pp", 1, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("pp", 1, "assets/fonts/pp.svg"));
 
-    animalContainer.appendChild(createAnimal("p", 2, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("p", 2, "assets/fonts/p.svg"));
 
-    animalContainer.appendChild(createAnimal("mp", 3, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("mp", 3, "assets/fonts/mp.svg"));
 
-    animalContainer.appendChild(createAnimal("mf", 4, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("mf", 4, "assets/fonts/mf.svg"));
 
-    animalContainer.appendChild(createAnimal("f", 5, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("f", 5, "assets/fonts/f.svg"));
 
-    animalContainer.appendChild(createAnimal("ff", 6, "assets/image/pp.svg"));
+    animalContainer.appendChild(createAnimal("ff", 6, "assets/fonts/ff.svg"));
 
     multiSequencer.domElement.appendChild(animalContainer);
 
@@ -373,7 +385,7 @@
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       //Remove Next
-      // carousel.next();
+      carousel.next();
       multiSequencer.setActiveSequencer(
         multiSequencer.sequencers[carousel.activeChildIndex]
       );
