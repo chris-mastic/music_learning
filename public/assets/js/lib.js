@@ -7,6 +7,7 @@ musicbox.config.conga = {};
 
 let sequence = [null, null, null, null];
 let isStart = 0;
+let statusDynamics = 0;
 
 musicbox.Animation = function (data, framerate) {
   this.data = data;
@@ -564,11 +565,12 @@ musicbox.Character.prototype.makeStrikeTimeline = function (
 
       onUpdate: function () {
         _this.groups["arm" + side].rotation =
-          (armRotationAnimation.at(progress.t, 0) * Math.PI) / 180;
+          (armRotationAnimation.at(progress.t, statusDynamics) * Math.PI) / 180;
 
         if (stickRotationAnimation) {
           _this.groups["stick" + side].rotation =
-            (stickRotationAnimation.at(progress.t, 0) * Math.PI) / 180;
+            (stickRotationAnimation.at(progress.t, statusDynamics) * Math.PI) /
+            180;
         }
 
         // if ( armOpts.animation.position ) {
@@ -1157,22 +1159,34 @@ musicbox.Sequencer.prototype.onInterval = function (time) {
 
   if (this.stepNumber % this.beats == 1) {
     onBlinking(this.loopNumber);
+    changeDynamics(this.loopNumber);
     this.loopNumber++;
-    console.log("blink", this.stepNumber);
+    console.log("blink", this.loopNumber);
   }
   this.stepNumber %= this.beats;
 };
 
 function initInterval() {
-  console.log("paused");
+  // console.log("paused");
   this.stepNumber = 0;
   this.loopNumber = 0;
   let zones = document.querySelectorAll(".drop-zone");
   zones.forEach((zone) => zone.classList.remove("blinking"));
 }
 
+function changeDynamics(index) {
+  let zones = document.querySelectorAll(".drop-zone");
+  let zone = zones[index % 4];
+  if (!zone.getAttribute("data-index")) {
+    statusDynamics = 1;
+  } else {
+    statusDynamics = 6 - zone.getAttribute("data-index");
+  }
+  console.log("static", statusDynamics);
+}
+
 function onBlinking(number) {
-  console.log("onBlinking", number);
+  // console.log("onBlinking", number);
   let zones = document.querySelectorAll(".drop-zone");
   zones.forEach((zone) => zone.classList.remove("blinking"));
   zones[number % 4].classList.add("blinking");

@@ -161,7 +161,7 @@
     for (let i = 0; i < 4; i++) {
       const dropZone = document.createElement("div");
       dropZone.className = "drop-zone";
-      dropZone.setAttribute("data-index", 0);
+      dropZone.setAttribute("data-index", 6);
 
       //Add event listners
       dropZone.addEventListener("dragover", (event) => {
@@ -385,15 +385,15 @@
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       //Remove Next
-      carousel.next();
-      multiSequencer.setActiveSequencer(
-        multiSequencer.sequencers[carousel.activeChildIndex]
-      );
-      if (wasPlaying) {
-        setTimeout(function () {
-          multiSequencer.play();
-        }, 50);
-      }
+      // carousel.next();
+      // multiSequencer.setActiveSequencer(
+      //   multiSequencer.sequencers[carousel.activeChildIndex]
+      // );
+      // if (wasPlaying) {
+      //   setTimeout(function () {
+      //     multiSequencer.play();
+      //   }, 50);
+      // }
     }
   }
 

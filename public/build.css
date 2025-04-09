@@ -118,6 +118,7 @@ input {
   -moz-background-size: 120%;
   background-size: 120%;
   background-image: url("assets/image/ui_arrow.svg");
+  display: none;
   top: 50%;
   background-position: center 45%;
   margin-top: -150px;
@@ -226,7 +227,7 @@ input {
   border: 2px dashed #bfaecf;
   background-color: #fefefe;
   width: 80px;
-  height: 50px;
+  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
