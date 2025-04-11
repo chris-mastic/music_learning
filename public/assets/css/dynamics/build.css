@@ -55,14 +55,14 @@ input {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
   filter: alpha(opacity=70);
 }
-#about {
+/* #about {
   right: 0;
-  background: url("assets/image/ui_about.svg") center center no-repeat;
+  background: url("../../image/ui_about.svg") center center no-repeat;
 }
 #menu {
   left: 0;
-  background: url("assets/image/ui_menu.svg") center center no-repeat;
-}
+  background: url("../../image/ui_menu.svg") center center no-repeat;
+} */
 .blinking {
   animation: blink 0.5s alternate infinite;
 }
@@ -84,7 +84,7 @@ input {
   -webkit-background-size: 90%;
   -moz-background-size: 90%;
   background-size: 90%;
-  background: #fff url("assets/image/ui_play.svg") center center no-repeat;
+  background: #fff url("../../image/ui_play.svg") center center no-repeat;
   -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
   -moz-transition: -moz-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
   -o-transition: -o-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
@@ -106,18 +106,18 @@ input {
   margin-left: -30px;
   bottom: 213px;
   left: 50%;
-  background-image: url("assets/image/ui_play.svg");
+  background-image: url("../../image/ui_play.svg");
 }
 .playing .puck-button.play-pause,
 .suspended .puck-button.play-pause {
-  background-image: url("assets/image/ui_pause.svg");
+  background-image: url("../../image/ui_pause.svg");
 }
 .puck-button.next,
 .puck-button.prev {
   -webkit-background-size: 120%;
   -moz-background-size: 120%;
   background-size: 120%;
-  background-image: url("assets/image/ui_arrow.svg");
+  background-image: url("../../image/ui_arrow.svg");
   top: 50%;
   background-position: center 45%;
   margin-top: -150px;
@@ -196,14 +196,26 @@ input {
   justify-content: center;
   gap: 30px;
   margin-top: 40px;
-  margin-left: 20px;
+}
+.divider {
+  display: flex;
+  justify-content: center;
+  /* text-align: center; */
+  border-bottom: 1px dashed #ccc;
+  /* margin: 20px 0; */
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  color: #888;
 }
 .blinking {
   animation: blink 0.5s alternate infinite;
   /* opacity: 0.5; */
 }
 .blinking .animal {
-  background-color: #FFFD8C;
+  background-color: #f6bebb;
 }
 .animal {
   width: 80px;
@@ -215,6 +227,8 @@ input {
   cursor: grab;
   transition: all 0.3s ease;
   user-select: none;
+  display: flex;
+  align-items: center;
 }
 .animal img {
   max-width: 100%;

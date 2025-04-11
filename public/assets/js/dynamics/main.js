@@ -205,7 +205,14 @@
       dropZonesContainer.appendChild(dropZone);
     }
 
+
     multiSequencer.domElement.appendChild(dropZonesContainer);
+
+    
+    const divider = document.createElement("div");
+    divider.className = "divider";
+
+    multiSequencer.domElement.appendChild(divider);
 
     // Create animal container
     const animalContainer = document.createElement("div");

@@ -1199,11 +1199,11 @@ function onBlinking(number) {
     volumeLevel = 0;
   }
 
-  console.log(volumeLevel);
-  console.log('debug musicbox', window.carousel.activeChildIndex)
+  // console.log(volumeLevel);
+  // console.log('debug musicbox', window.carousel.activeChildIndex)
   const currentIndex = window.carousel.activeChildIndex;
   const sequencer = sequencerArr[currentIndex];
-  console.log('debug sequencer', sequencer)
+  // console.log('debug sequencer', sequencer)
   sequencer.sampler.volume.value = volumeLevel
 }
 
