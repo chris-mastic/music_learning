@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
 app.get('/dynamics', (req, res) => {
   res.sendFile(path.join(__dirname, 'dynamics.html'));
 });
+app.get('/dynamics/help', (req, res) => {
+  res.sendFile(path.join(__dirname, 'help/dynamics_help.html'));
+});
 
 // Set the port to listen on
 const PORT = process.env.PORT || 3000;

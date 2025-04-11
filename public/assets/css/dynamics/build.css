@@ -37,6 +37,7 @@ input {
 #container {
   background: #fff;
   position: relative;
+  margin-top: -40px;
   height: 100%;
 }
 #container canvas {
@@ -63,6 +64,42 @@ input {
   left: 0;
   background: url("../../image/ui_menu.svg") center center no-repeat;
 } */
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #fff;
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav-btn {
+  background-color: #fff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.nav-btn:hover {
+  background-color: #ece0fe;
+}
+
 .blinking {
   animation: blink 0.5s alternate infinite;
 }
@@ -201,7 +238,7 @@ input {
   display: flex;
   justify-content: center;
   /* text-align: center; */
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 1px dashed #d394f5;
   /* margin: 20px 0; */
   width: 300px;
   margin-left: auto;
