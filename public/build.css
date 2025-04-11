@@ -118,7 +118,6 @@ input {
   -moz-background-size: 120%;
   background-size: 120%;
   background-image: url("assets/image/ui_arrow.svg");
-  display: none;
   top: 50%;
   background-position: center 45%;
   margin-top: -150px;
@@ -202,6 +201,9 @@ input {
 .blinking {
   animation: blink 0.5s alternate infinite;
   /* opacity: 0.5; */
+}
+.blinking .animal {
+  background-color: #FFFD8C;
 }
 .animal {
   width: 80px;

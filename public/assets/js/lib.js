@@ -4,8 +4,9 @@ musicbox.config.timpani = {};
 musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
+let volumeLevel = 0;
 
-let sequence = [null, null, null, null];
+let sequencerArr = [];
 let isStart = 0;
 let statusDynamics = 0;
 
@@ -23,7 +24,6 @@ musicbox.Animation.prototype.at = function (t, dim) {
 
   var l = frame - frameLowIndex;
 
-  // console.log( frameLowIndex, frameHighIndex, l );
 
   var frameLow = this.data.frameData[frameLowIndex].val[dim];
   var frameHigh =
@@ -31,7 +31,6 @@ musicbox.Animation.prototype.at = function (t, dim) {
       Math.min(this.data.frameData.length - 1, frameHighIndex)
     ].val[dim];
 
-  // console.log( frameLow, frameHigh );
 
   return aaf.utils.math.lerp(frameLow, frameHigh, l);
 };
@@ -816,6 +815,7 @@ musicbox.MultiSequencer = function (sequencers) {
     var sequencer = sequencers[i];
     sequencer.active = false;
     this.sequencers.push(sequencer);
+    sequencerArr.push(sequencer)
     // this.domElement.appendChild(sequencer.domElement);
   }
 
@@ -834,7 +834,6 @@ musicbox.MultiSequencer = function (sequencers) {
         // Tone.Transport.start();
         // just play it reaaaalllly quiet ( ios hack )
         this.activeSequencer.triggerSample(2, 0.001);
-        // console.log( this.activeSequencer.trackNames );
       }
 
       this.playing ? this.pause() : this.play();
@@ -1161,7 +1160,7 @@ musicbox.Sequencer.prototype.onInterval = function (time) {
     onBlinking(this.loopNumber);
     changeDynamics(this.loopNumber);
     this.loopNumber++;
-    console.log("blink", this.loopNumber);
+    // console.log("blink", this.loopNumber);
   }
   this.stepNumber %= this.beats;
 };
@@ -1182,7 +1181,6 @@ function changeDynamics(index) {
   } else {
     statusDynamics = 6 - zone.getAttribute("data-index");
   }
-  console.log("static", statusDynamics);
 }
 
 function onBlinking(number) {
@@ -1190,8 +1188,23 @@ function onBlinking(number) {
   let zones = document.querySelectorAll(".drop-zone");
   zones.forEach((zone) => zone.classList.remove("blinking"));
   zones[number % 4].classList.add("blinking");
+  if (zones[number % 4].getAttribute("data-index")) {
+    // If the zone has a data-index attribute, use it to determine volume
+    const zoneIndex = parseInt(zones[number % 4].getAttribute("data-index"));
+    // Map zone index to volume range (e.g., 1-5 to volume levels)
+    // Higher index = louder volume (less negative dB value)
+    volumeLevel = -12 + (zoneIndex * 2); // Adjust formula as needed
+  } else {
+    // Default volume if no data-index is present
+    volumeLevel = 0;
+  }
 
-  // Show animation image
+  console.log(volumeLevel);
+  console.log('debug musicbox', window.carousel.activeChildIndex)
+  const currentIndex = window.carousel.activeChildIndex;
+  const sequencer = sequencerArr[currentIndex];
+  console.log('debug sequencer', sequencer)
+  sequencer.sampler.volume.value = volumeLevel
 }
 
 // UI
@@ -1368,7 +1381,7 @@ musicbox.Sequencer.prototype.triggerSample = function (track, vel) {
     vel = 1;
   }
   Tone.Transport.clear(this.intervalID);
-  this.sampler.volume.value = 0; // volume is in dB so this actually unmutes
+  this.sampler.volume.value = volumeLevel; // volume is in dB so this actually unmutes
   this.sampler.triggerAttackRelease(
     this.trackNames[track],
     "1n",
@@ -1823,7 +1836,7 @@ musicbox.config.kit.characterBig = {
 // }
 
 musicbox.config.kit.sequencer = {
-  beats: 8,
+  beats: 12,
   timeSignature: 4,
   bpm: 96,
 
@@ -1845,8 +1858,8 @@ musicbox.config.kit.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
 
@@ -2037,7 +2050,7 @@ musicbox.config.timpani.characterBig = {
 // };
 
 musicbox.config.timpani.sequencer = {
-  beats: 6,
+  beats: 12,
   timeSignature: 3,
   bpm: 105,
 
@@ -2060,8 +2073,8 @@ musicbox.config.timpani.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
 musicbox.config.woodblock.characterBig = {
@@ -2113,7 +2126,7 @@ musicbox.config.woodblock.characterBig = {
 
   stickLeft: {
     texture: "texture/slices_robot-big-stick-left.png",
-    position: { x: -30, y: 24 },
+    position: { x: -22, y: 23 },
     animation: {
       rotation: {
         file: "json/robot-big-arm-left.json",
@@ -2242,9 +2255,9 @@ musicbox.config.woodblock.characterBig = {
 // };
 
 musicbox.config.woodblock.sequencer = {
-  beats: 10,
+  beats: 12,
   timeSignature: 5,
-  bpm: 170,
+  bpm: 120,
 
   samples: [
     // 'assets/sample/robot-clave.mp3',
@@ -2265,8 +2278,8 @@ musicbox.config.woodblock.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
 //# sourceMappingURL=sourcemaps/lib.js.map

@@ -129,6 +129,7 @@
       children: pairContainers,
       childWidth: CHILD_WIDTH,
     });
+    window.carousel = carousel;
 
     characterContainer.addChild(carousel.container);
 
@@ -385,15 +386,15 @@
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       //Remove Next
-      // carousel.next();
-      // multiSequencer.setActiveSequencer(
-      //   multiSequencer.sequencers[carousel.activeChildIndex]
-      // );
-      // if (wasPlaying) {
-      //   setTimeout(function () {
-      //     multiSequencer.play();
-      //   }, 50);
-      // }
+      carousel.next();
+      multiSequencer.setActiveSequencer(
+        multiSequencer.sequencers[carousel.activeChildIndex]
+      );
+      if (wasPlaying) {
+        setTimeout(function () {
+          multiSequencer.play();
+        }, 50);
+      }
     }
   }
 
