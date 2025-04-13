@@ -100,9 +100,6 @@ input {
   background-color: #ece0fe;
 }
 
-.blinking {
-  animation: blink 0.5s alternate infinite;
-}
 @keyframes blink {
   from {
     opacity: 1;
@@ -248,7 +245,7 @@ input {
   color: #888;
 }
 .blinking {
-  animation: blink 0.5s alternate infinite;
+  /* animation: blink 0.5s alternate infinite; */
   /* opacity: 0.5; */
 }
 .blinking .animal {
