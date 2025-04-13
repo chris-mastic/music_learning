@@ -5,6 +5,7 @@ musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 let volumeLevel = 0;
+const bpmArray = [[2,2,2,2],[2,2,2,2],[2,2,2,2],[2,2,2,2]];
 
 let sequencerArr = [];
 let isStart = 0;
@@ -848,7 +849,13 @@ musicbox.MultiSequencer = function (sequencers) {
       this.playing ? this.pause() : this.play();
       if (this.playing) {
         let randomIndex = Math.floor(Math.random() * 4) + 1;
-        this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
+        // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
+        this.audio.src = `/assets/music/dynamics/1/1.mp3`;
+        // this.audio.playbackRate = bpmArray[this.activeSequencerIndex][randomIndex - 1];
+        this.audio.playbackRate = 1.194;
+        setTimeout(() => {
+          audio.play();
+        }, 35);
         this.audio.play();
       }
       if(!this.playing){
@@ -2065,7 +2072,7 @@ musicbox.config.timpani.characterBig = {
 musicbox.config.timpani.sequencer = {
   beats: 4,
   timeSignature: 3,
-  bpm: 45,
+  bpm: 40,
 
   samples: [
     // 'assets/sample/timpani-triangle.mp3',
