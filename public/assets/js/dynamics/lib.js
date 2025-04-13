@@ -114,6 +114,9 @@ musicbox.Carousel.prototype.next = function () {
   var index = this.activeChildIndex + 1;
   index %= this.children.length;
 
+  this.audio = document.getElementById("bcAudio");
+  this.audio.pause()
+
   this.setActive(index);
 };
 
@@ -122,6 +125,8 @@ musicbox.Carousel.prototype.prev = function () {
   if (index < 0) {
     index += this.children.length;
   }
+  this.audio = document.getElementById("bcAudio");
+  this.audio.pause()
 
   this.setActive(index);
 };
@@ -836,10 +841,18 @@ musicbox.MultiSequencer = function (sequencers) {
         this.activeSequencer.triggerSample(2, 0.001);
       }
 
+      if(!this.audio){
+        this.audio = document.getElementById("bcAudio");
+        this.audio.loop = true;
+      }
       this.playing ? this.pause() : this.play();
-      if (!this.playing) {
-        initInterval();
-        isStart = 0;
+      if (this.playing) {
+        let randomIndex = Math.floor(Math.random() * 4) + 1;
+        this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
+        this.audio.play();
+      }
+      if(!this.playing){
+        this.audio.pause();
       }
     }.bind(this)
   );
@@ -1184,27 +1197,27 @@ function changeDynamics(index) {
 }
 
 function onBlinking(number) {
-  // console.log("onBlinking", number);
   let zones = document.querySelectorAll(".drop-zone");
   zones.forEach((zone) => zone.classList.remove("blinking"));
   zones[number % 4].classList.add("blinking");
+  let bcLevel = 0.1;
   if (zones[number % 4].getAttribute("data-index")) {
     // If the zone has a data-index attribute, use it to determine volume
     const zoneIndex = parseInt(zones[number % 4].getAttribute("data-index"));
-    // Map zone index to volume range (e.g., 1-5 to volume levels)
-    // Higher index = louder volume (less negative dB value)
     volumeLevel = -12 + (zoneIndex * 2); // Adjust formula as needed
+    bcLevel = 0.1 + (zoneIndex * 0.1);
   } else {
-    // Default volume if no data-index is present
     volumeLevel = 0;
   }
-
-  // console.log(volumeLevel);
-  // console.log('debug musicbox', window.carousel.activeChildIndex)
+  
+  // Control volume of sequencer
   const currentIndex = window.carousel.activeChildIndex;
   const sequencer = sequencerArr[currentIndex];
-  // console.log('debug sequencer', sequencer)
   sequencer.sampler.volume.value = volumeLevel
+
+  // Control volume of background music
+  this.audio = document.getElementById("bcAudio");
+  this.audio.volume = bcLevel;
 }
 
 // UI
@@ -1631,7 +1644,7 @@ musicbox.config.conga.characterBig = {
 // };
 
 musicbox.config.conga.sequencer = {
-  beats: 12,
+  beats: 8,
   timeSignature: 6,
   bpm: 160,
 
@@ -1654,8 +1667,8 @@ musicbox.config.conga.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // [0,0,0,1,0,0,0,0,1,0,0,1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // [1,0,0,0,0,0,1,1,0,0,1,0]
+    [1, 1, 1, 1, 1, 1, 1, 1], // [0,0,0,1,0,0,0,0,1,0,0,1],
+    [1, 1, 1, 1, 1, 1, 1, 1], // [1,0,0,0,0,0,1,1,0,0,1,0]
   ],
 };
 
@@ -1836,9 +1849,9 @@ musicbox.config.kit.characterBig = {
 // }
 
 musicbox.config.kit.sequencer = {
-  beats: 12,
+  beats: 4,
   timeSignature: 4,
-  bpm: 96,
+  bpm: 80,
 
   samples: [
     "assets/sample/kit-hat.mp3",
@@ -1858,8 +1871,8 @@ musicbox.config.kit.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
   ],
 };
 
@@ -2050,9 +2063,9 @@ musicbox.config.timpani.characterBig = {
 // };
 
 musicbox.config.timpani.sequencer = {
-  beats: 12,
+  beats: 4,
   timeSignature: 3,
-  bpm: 105,
+  bpm: 45,
 
   samples: [
     // 'assets/sample/timpani-triangle.mp3',
@@ -2073,8 +2086,8 @@ musicbox.config.timpani.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
   ],
 };
 musicbox.config.woodblock.characterBig = {
@@ -2255,7 +2268,7 @@ musicbox.config.woodblock.characterBig = {
 // };
 
 musicbox.config.woodblock.sequencer = {
-  beats: 12,
+  beats: 8,
   timeSignature: 5,
   bpm: 120,
 
@@ -2278,8 +2291,8 @@ musicbox.config.woodblock.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
 //# sourceMappingURL=sourcemaps/lib.js.map

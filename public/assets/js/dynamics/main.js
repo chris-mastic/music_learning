@@ -53,6 +53,7 @@
   var CHILD_WIDTH = 1900; // hacky
 
   function init() {
+    
     pixi = new musicbox.EasyPIXI({
       fullscreen: false,
       transparent: false,
@@ -143,6 +144,7 @@
         pairs[i].characterBig.stopBobbing();
       }
     });
+    window.multiSequencer = multiSequencer;
 
     multiSequencer.on("change", function (index, prev) {
       var pair = pairs[prev];
@@ -257,9 +259,25 @@
 
     multiSequencer.domElement.appendChild(animalContainer);
 
+    
+
+    // Identify selected box
+    // let zones = document.querySelectorAll("drop-zone");
+    // const activeBox = 1;
+    // for (let i = 0; i < 4; i++){
+    //   if(zones[i].getAttribute("blinking")){
+    //     activeBox = parseInt(zones[i].getAttribute('data-index')) + 1;
+    //     volumLeve = -16 + (activeBox * 2);
+    //   }
+    // }
+    // audio.volume = volumeLevel;
+    
+
+    // audio.play();
+
     // Get going!
     // -------------------------------
-
+    
     Tone.Buffer.on("load", function () {
       // I hate having more async in here as that's what aaf.init is
       // supposed to get rid of, but it don't quite work w/ Tone yet
@@ -397,11 +415,11 @@
       multiSequencer.setActiveSequencer(
         multiSequencer.sequencers[carousel.activeChildIndex]
       );
-      if (wasPlaying) {
-        setTimeout(function () {
-          multiSequencer.play();
-        }, 50);
-      }
+      // if (wasPlaying) {
+      //   setTimeout(function () {
+      //     multiSequencer.play();
+      //   }, 50);
+      // }
     }
   }
 
@@ -414,11 +432,11 @@
         multiSequencer.sequencers[carousel.activeChildIndex]
       );
 
-      if (wasPlaying) {
-        setTimeout(function () {
-          multiSequencer.play();
-        }, 50);
-      }
+      // if (wasPlaying) {
+      //   setTimeout(function () {
+      //     multiSequencer.play();
+      //   }, 50);
+      // }
     }
   }
 

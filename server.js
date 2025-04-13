@@ -19,6 +19,10 @@ app.get('/dynamics/help', (req, res) => {
   res.sendFile(path.join(__dirname, 'help/dynamics_help.html'));
 });
 
+app.get('/metronome', (req, res) => {
+  res.sendFile(path.join(__dirname, 'metronome.html'));
+});
+
 // Set the port to listen on
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
