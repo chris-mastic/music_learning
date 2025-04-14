@@ -739,14 +739,14 @@ musicbox.CharacterEyes.prototype.onComplete = function() {
     this.blinkTimeline.restart( true );
 
 };
-musicbox.CharacterPair = function( charBig, charSmall ) {
+musicbox.CharacterPair = function( charSmall ) {
   
-    this.characterBig = charBig;
+    // this.characterBig = charBig;
     this.characterSmall = charSmall;
 
     this.container = new PIXI.Container();
 
-    this.container.addChild( this.characterBig.container );
+    // this.container.addChild( this.characterBig.container );
     this.container.addChild( this.characterSmall.container );
 
     this.left = this.left.bind( this );
@@ -765,8 +765,8 @@ musicbox.CharacterPair = function( charBig, charSmall ) {
         this.adoringLookTimeline.delay( 5 );
     }
 
-    this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.2, { x: 25 * 2, y: 9 * 2, ease: Quad.inOut }, 0 );
-    this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
+    // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.2, { x: 25 * 2, y: 9 * 2, ease: Quad.inOut }, 0 );
+    // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
 
     this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: -20 * 2, y: -5 * 2, ease: Quad.inOut }, 0 );
     this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
@@ -786,11 +786,11 @@ musicbox.CharacterPair.prototype.onAdoringLookComplete = function() {
 };
 
 musicbox.CharacterPair.prototype.left = function( t ) {
-    this.characterBig.strikeLeft( t );
+    // this.characterBig.strikeLeft( t );
 };
 
 musicbox.CharacterPair.prototype.right = function( t ) {
-    this.characterBig.strikeRight( t );
+    // this.characterBig.strikeRight( t );
 };
 
 musicbox.CharacterPair.prototype.small = function( t ) {
@@ -1403,7 +1403,7 @@ musicbox.Sequencer.prototype.buildDom = function( opts ) {
     this.playhead = document.createElement( 'div' );
     this.playhead.className = 'playhead';
 
-    this.domElement.appendChild( this.playhead );
+    // this.domElement.appendChild( this.playhead );
 
     // make drag listener
 
@@ -1552,86 +1552,86 @@ musicbox.Sequencer.prototype.toggleBeat = function( track, beat, el ) {
   );
 })();
 
-musicbox.config.conga.characterBig = {
+// musicbox.config.conga.characterBig = {
 
-    position: { 
-        x: 600, 
-        y: 750, 
-    }, 
+//     position: { 
+//         x: 600, 
+//         y: 750, 
+//     }, 
 
-    strikeLeft: {
-        anticipation: 0.15
-    }, 
+//     strikeLeft: {
+//         anticipation: 0.15
+//     }, 
 
-    eyes: { 
-        position: { 
-            x: 0, 
-            y: -215
-        }
-    }, 
+//     eyes: { 
+//         position: { 
+//             x: 0, 
+//             y: -215
+//         }
+//     }, 
 
-    hitbox: { 
-        left: { 
-            x: -300, 
-            y: -600, 
-            width: 500, 
-            height: 1200
-        }, 
-        right: { 
-            x: 200, 
-            y: -600, 
-            width: 430, 
-            height: 1200
-        }
-    }, 
+//     hitbox: { 
+//         left: { 
+//             x: -300, 
+//             y: -600, 
+//             width: 500, 
+//             height: 1200
+//         }, 
+//         right: { 
+//             x: 200, 
+//             y: -600, 
+//             width: 430, 
+//             height: 1200
+//         }
+//     }, 
 
-    strikeRight: {
-        anticipation: 0.15
-    }, 
+//     strikeRight: {
+//         anticipation: 0.15
+//     }, 
 
-    armLeft: {
-        texture: 'texture/slices_conga-big-arm-left.png', 
-        position: { x: -30, y: -3 }, 
-        animation: {
-            rotation: { 
-                file: 'json/conga-big-arm-left.json', 
-                layer: 'C_guy1 armL-rotation' 
-            }
-        }
-    }, 
+//     armLeft: {
+//         texture: 'texture/slices_conga-big-arm-left.png', 
+//         position: { x: -30, y: -3 }, 
+//         animation: {
+//             rotation: { 
+//                 file: 'json/conga-big-arm-left.json', 
+//                 layer: 'C_guy1 armL-rotation' 
+//             }
+//         }
+//     }, 
 
-    armRight: {
-        texture: 'texture/slices_conga-big-arm-right.png', 
-        position: { x: 120, y: -3 }, 
-        animation: {
-            rotation: { 
-                file: 'json/conga-big-arm-right.json', 
-                layer: 'C_guy1 armR-rotation'
-            }
-        }
-    }, 
+//     armRight: {
+//         texture: 'texture/slices_conga-big-arm-right.png', 
+//         position: { x: 120, y: -3 }, 
+//         animation: {
+//             rotation: { 
+//                 file: 'json/conga-big-arm-right.json', 
+//                 layer: 'C_guy1 armR-rotation'
+//             }
+//         }
+//     }, 
 
-    body: { 
-        texture: 'texture/slices_bird-big-body.png', 
-        position: { x: 175, y: 330 }
-    }, 
+//     body: { 
+//         texture: 'texture/slices_bird-big-body.png', 
+//         position: { x: 175, y: 330 }
+//     }, 
 
-    face: {
-        texture: 'texture/slices_bird-big-face.png', 
-        position: { x: -5, y: -180 }
-    }, 
+//     face: {
+//         texture: 'texture/slices_bird-big-face.png', 
+//         position: { x: -5, y: -180 }
+//     }, 
     
-    front: { 
-        texture: 'texture/slices_congas.png', 
-        position: { x: 180, y: 520 }
-    }, 
+//     front: { 
+//         texture: 'texture/slices_congas.png', 
+//         position: { x: 180, y: 520 }
+//     }, 
 
-    legs: { 
-        texture: 'texture/slices_bird-big-legs.png', 
-        position: { x: 180, y: 300 }
-    }
+//     legs: { 
+//         texture: 'texture/slices_bird-big-legs.png', 
+//         position: { x: 180, y: 300 }
+//     }
 
-};
+// };
 
 musicbox.config.conga.characterSmall = {
 
@@ -1712,133 +1712,133 @@ musicbox.config.conga.sequencer = {
 
     samples: [ 
         'assets/sample/conga-cowbell.mp3', 
-        'assets/sample/conga-high.mp3', 
-        'assets/sample/conga-low.mp3'
+        // 'assets/sample/conga-high.mp3', 
+        // 'assets/sample/conga-low.mp3'
     ], 
 
     symbols: [
         'assets/image/ui_congas1.svg', 
-        'assets/image/ui_congas2.svg', 
-        'assets/image/ui_congas3.svg'
+        // 'assets/image/ui_congas2.svg', 
+        // 'assets/image/ui_congas3.svg'
     ], 
 
     order: [ 
         'small', 
-        'left', 
-        'right' 
+        // 'left', 
+        // 'right' 
     ], 
 
     tracks: [
         [1,0,1,0,1,1,0,1,0,1,0,1],
-        [0,0,0,0,0,0,0,0,0,0,0,0],// [0,0,0,1,0,0,0,0,1,0,0,1],
-        [0,0,0,0,0,0,0,0,0,0,0,0]// [1,0,0,0,0,0,1,1,0,0,1,0]
+        // [0,0,0,0,0,0,0,0,0,0,0,0],// [0,0,0,1,0,0,0,0,1,0,0,1],
+        // [0,0,0,0,0,0,0,0,0,0,0,0]// [1,0,0,0,0,0,1,1,0,0,1,0]
     ]
 
 };
     
 
-musicbox.config.kit.characterBig = {
+// musicbox.config.kit.characterBig = {
 
    
 
-    strikeLeft: { 
-        anticipation: 0.25
-    }, 
+//     strikeLeft: { 
+//         anticipation: 0.25
+//     }, 
 
-    strikeRight: { 
-        anticipation: 0.25
-    }, 
+//     strikeRight: { 
+//         anticipation: 0.25
+//     }, 
 
-    armLeft: {
-        texture: 'texture/slices_drum-big-arm-left.png', 
-        position: { x: 0, y: 0 }, 
-        animation: {
-            rotation: {
-                file: 'json/drum-big-arms.json', 
-                layer: 'C_guy1 armL-rotation'
-            }
-        }
-    }, 
+//     armLeft: {
+//         texture: 'texture/slices_drum-big-arm-left.png', 
+//         position: { x: 0, y: 0 }, 
+//         animation: {
+//             rotation: {
+//                 file: 'json/drum-big-arms.json', 
+//                 layer: 'C_guy1 armL-rotation'
+//             }
+//         }
+//     }, 
 
-    stickLeft: {
-        texture: 'texture/slices_drum-big-stick-left.png', 
-        position: { x: -40, y: -12 }, 
-        behindArms: true, 
-        animation: {
-            rotation: {
-                file: 'json/drum-big-arms.json', 
-                layer: 'C_guy1 stickL-rotation'
-            }
-        }
-    }, 
+//     stickLeft: {
+//         texture: 'texture/slices_drum-big-stick-left.png', 
+//         position: { x: -40, y: -12 }, 
+//         behindArms: true, 
+//         animation: {
+//             rotation: {
+//                 file: 'json/drum-big-arms.json', 
+//                 layer: 'C_guy1 stickL-rotation'
+//             }
+//         }
+//     }, 
 
-    armRight: {
-        texture: 'texture/slices_drum-big-arm-right.png', 
-        position: { x: 120, y: 0 }, 
-        animation: {
-            rotation: {
-                file: 'json/drum-big-arms.json', 
-                layer: 'C_guy1 armR-rotation'
-            }
-        }
-    }, 
+//     armRight: {
+//         texture: 'texture/slices_drum-big-arm-right.png', 
+//         position: { x: 120, y: 0 }, 
+//         animation: {
+//             rotation: {
+//                 file: 'json/drum-big-arms.json', 
+//                 layer: 'C_guy1 armR-rotation'
+//             }
+//         }
+//     }, 
 
-    stickRight: {
-        texture: 'texture/slices_drum-big-stick-right.png', 
-        position: { x: 29, y: 29 }, 
-        behindArms: true, 
-        animation: {
-            rotation: {
-                file: 'json/drum-big-arms.json', 
-                layer: 'C_guy1 stickR-rotation'
-            }
-        }
-    }, 
+//     stickRight: {
+//         texture: 'texture/slices_drum-big-stick-right.png', 
+//         position: { x: 29, y: 29 }, 
+//         behindArms: true, 
+//         animation: {
+//             rotation: {
+//                 file: 'json/drum-big-arms.json', 
+//                 layer: 'C_guy1 stickR-rotation'
+//             }
+//         }
+//     }, 
 
-    position: { 
-        x: 450, 
-        y: 740, 
-    }, 
+//     position: { 
+//         x: 450, 
+//         y: 740, 
+//     }, 
 
-    hitbox: { 
-        left: { 
-            x: 300, 
-            y: -600, 
-            width: 350, 
-            height: 1200
-        }, 
-        right: { 
-            x: -200, 
-            y: -600, 
-            width: 500, 
-            height: 1200
-        }
-    }, 
+//     hitbox: { 
+//         left: { 
+//             x: 300, 
+//             y: -600, 
+//             width: 350, 
+//             height: 1200
+//         }, 
+//         right: { 
+//             x: -200, 
+//             y: -600, 
+//             width: 500, 
+//             height: 1200
+//         }
+//     }, 
 
-    eyes: { 
-        position: { 
-            x: -10, 
-            y: -250
-        }
-    }, 
+//     eyes: { 
+//         position: { 
+//             x: -10, 
+//             y: -250
+//         }
+//     }, 
     
-    body: { 
-        texture: 'texture/slices_monster-big-body.png', 
-        position: { x: 280, y: 300 }
-    }, 
+//     body: { 
+//         texture: 'texture/slices_monster-big-body.png', 
+//         position: { x: 280, y: 300 }
+//     }, 
 
-    front: { 
-        texture: 'texture/slices_drum-kit.png', 
-        position: { x: 220, y: 500 }, 
-        behindArms: true
-    }, 
+//     front: { 
+//         texture: 'texture/slices_drum-kit.png', 
+//         position: { x: 220, y: 500 }, 
+//         behindArms: true
+//     }, 
 
-    legs: { 
-        texture: 'texture/slices_monster-big-legs.png', 
-        position: { x: 280, y: 230 }
-    }
+//     legs: { 
+//         texture: 'texture/slices_monster-big-legs.png', 
+//         position: { x: 280, y: 230 }
+//     }
 
-}
+// }
 musicbox.config.kit.characterSmall = {
 
     position: { 
@@ -1925,124 +1925,124 @@ musicbox.config.kit.sequencer = {
     bpm: 96, 
 
     samples: [ 
-        'assets/sample/kit-hat.mp3', 
-        'assets/sample/kit-snare.mp3', 
+        // 'assets/sample/kit-hat.mp3', 
+        // 'assets/sample/kit-snare.mp3', 
         'assets/sample/kit-tom.mp3'
     ], 
     symbols: [
-        'assets/image/ui_drums1.svg', 
-        'assets/image/ui_drums2.svg', 
+        // 'assets/image/ui_drums1.svg', 
+        // 'assets/image/ui_drums2.svg', 
         'assets/image/ui_drums3.svg'
     ], 
 
     order: [ 
-        'right', 
-        'left', 
+        // 'right', 
+        // 'left', 
         'small' 
     ], 
     
     tracks: [
-        [0,0,0,0,0,0,0,0], // [1,1,1,1,1,1,1,1],
-        [0,0,0,0,0,0,0,0], // [0,0,1,0,0,0,1,0],
+        // [0,0,0,0,0,0,0,0], // [1,1,1,1,1,1,1,1],
+        // [0,0,0,0,0,0,0,0], // [0,0,1,0,0,0,1,0],
         [1,0,0,1,1,0,0,0]
     ]
 
 };
 
-musicbox.config.timpani.characterBig = {
+// musicbox.config.timpani.characterBig = {
 
-    position: { 
-        x: 550, 
-        y: 790, 
-    }, 
+//     position: { 
+//         x: 550, 
+//         y: 790, 
+//     }, 
 
-    hitbox: { 
-        left: { 
-            x: -300, 
-            y: -600, 
-            width: 500, 
-            height: 1200
-        }, 
-        right: { 
-            x: 200, 
-            y: -600, 
-            width: 500, 
-            height: 1200
-        }
-    }, 
+//     hitbox: { 
+//         left: { 
+//             x: -300, 
+//             y: -600, 
+//             width: 500, 
+//             height: 1200
+//         }, 
+//         right: { 
+//             x: 200, 
+//             y: -600, 
+//             width: 500, 
+//             height: 1200
+//         }
+//     }, 
 
-    face: {
-        texture: 'texture/slices_monkey-big-face.png', 
-        position: { x: 12, y: -230 }
-    }, 
+//     face: {
+//         texture: 'texture/slices_monkey-big-face.png', 
+//         position: { x: 12, y: -230 }
+//     }, 
 
-    strikeLeft: { 
-        anticipation: 0.15
-    }, 
+//     strikeLeft: { 
+//         anticipation: 0.15
+//     }, 
 
-    strikeRight: { 
-        anticipation: 0.3
-    }, 
+//     strikeRight: { 
+//         anticipation: 0.3
+//     }, 
 
-    eyes: { 
-        position: { 
-            x: 15, 
-            y: -255
-        }, 
-        color: 0x100d11
-    }, 
+//     eyes: { 
+//         position: { 
+//             x: 15, 
+//             y: -255
+//         }, 
+//         color: 0x100d11
+//     }, 
 
-    armLeft: {
-        texture: 'texture/slices_timpani-big-arm-left.png', 
-        position: { x: 0, y: 0 }, 
-        animation: {
-            rotation: { file: 'json/timpani-big-arm-left.json', layer: 'C_guy1 armL-rotation' }
-        }
-    }, 
+//     armLeft: {
+//         texture: 'texture/slices_timpani-big-arm-left.png', 
+//         position: { x: 0, y: 0 }, 
+//         animation: {
+//             rotation: { file: 'json/timpani-big-arm-left.json', layer: 'C_guy1 armL-rotation' }
+//         }
+//     }, 
 
-    stickLeft: {
-        texture: 'texture/slices_timpani-big-stick-left.png', 
-        position: { x: -25, y: -12 }, 
-        animation: {
-            rotation: { file: 'json/timpani-big-arm-left.json', layer: 'C_guy1 malletL-rotation' }
-        }
-    }, 
+//     stickLeft: {
+//         texture: 'texture/slices_timpani-big-stick-left.png', 
+//         position: { x: -25, y: -12 }, 
+//         animation: {
+//             rotation: { file: 'json/timpani-big-arm-left.json', layer: 'C_guy1 malletL-rotation' }
+//         }
+//     }, 
 
-    armRight: {
-        texture: 'texture/slices_timpani-big-arm-right.png', 
-        position: { x: 110, y: 0 }, 
-        animation: {
-            rotation: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 armR-rotation' }, 
-            position: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 armR-position' }
-        }
-    }, 
+//     armRight: {
+//         texture: 'texture/slices_timpani-big-arm-right.png', 
+//         position: { x: 110, y: 0 }, 
+//         animation: {
+//             rotation: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 armR-rotation' }, 
+//             position: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 armR-position' }
+//         }
+//     }, 
 
-    stickRight: {
-        texture: 'texture/slices_timpani-big-stick-right.png', 
-        position: { x: -15, y: 17 }, 
-        animation: {
-            rotation: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 malletR-rotation' }
-        }
-    }, 
+//     stickRight: {
+//         texture: 'texture/slices_timpani-big-stick-right.png', 
+//         position: { x: -15, y: 17 }, 
+//         animation: {
+//             rotation: { file: 'json/timpani-big-arm-right.json', layer: 'C_guy1 malletR-rotation' }
+//         }
+//     }, 
 
-    body: { 
-        texture: 'texture/slices_monkey-big-body.png', 
-        position: { x: 220, y: 260 }
-    }, 
+//     body: { 
+//         texture: 'texture/slices_monkey-big-body.png', 
+//         position: { x: 220, y: 260 }
+//     }, 
 
-    front: { 
-        texture: 'texture/slices_timpanis.png', 
-        position: { x: 220, y: 550 }, 
-        behindArms: true
-    }, 
+//     front: { 
+//         texture: 'texture/slices_timpanis.png', 
+//         position: { x: 220, y: 550 }, 
+//         behindArms: true
+//     }, 
 
-    legs: { 
-        texture: 'texture/slices_monkey-big-legs.png', 
-        position: { x: 220, y: 240 }
-    }
+//     legs: { 
+//         texture: 'texture/slices_monkey-big-legs.png', 
+//         position: { x: 220, y: 240 }
+//     }
 
 
-};
+// };
 
 musicbox.config.timpani.characterSmall = {
 
@@ -2132,120 +2132,120 @@ musicbox.config.timpani.sequencer = {
     
     samples: [ 
         'assets/sample/timpani-triangle.mp3', 
-        'assets/sample/timpani-high.mp3', 
-        'assets/sample/timpani-low.mp3'
+        // 'assets/sample/timpani-high.mp3', 
+        // 'assets/sample/timpani-low.mp3'
     ], 
     
     symbols: [
         'assets/image/ui_timpani1.svg', 
-        'assets/image/ui_timpani2.svg', 
-        'assets/image/ui_timpani3.svg'
+        // 'assets/image/ui_timpani2.svg', 
+        // 'assets/image/ui_timpani3.svg'
     ], 
 
     order: [ 
         'small', 
-        'left', 
-        'right' 
+        // 'left', 
+        // 'right' 
     ], 
     
     tracks: [
         [0,0,0,0,0,0], // [1,0,0,0,0,0],
-        [0,0,0,0,0,0], // [0,1,1,0,1,1], 
-        [1,0,0,0,1,0]
+        // [0,0,0,0,0,0], // [0,1,1,0,1,1], 
+        // [1,0,0,0,1,0]
     ]
 
 };
-musicbox.config.woodblock.characterBig = {
+// musicbox.config.woodblock.characterBig = {
 
-    position: { 
-        x: 560, 
-        y: 810, 
-    }, 
+//     position: { 
+//         x: 560, 
+//         y: 810, 
+//     }, 
 
 
-    hitbox: { 
-        left: { 
-            x: -300, 
-            y: -600, 
-            width: 500, 
-            height: 1200
-        }, 
-        right: { 
-            x: 200, 
-            y: -600, 
-            width: 470, 
-            height: 1200
-        }
-    }, 
+//     hitbox: { 
+//         left: { 
+//             x: -300, 
+//             y: -600, 
+//             width: 500, 
+//             height: 1200
+//         }, 
+//         right: { 
+//             x: 200, 
+//             y: -600, 
+//             width: 470, 
+//             height: 1200
+//         }
+//     }, 
 
-    strikeLeft: { 
-        sample: 'sample/timpani-low.mp3', 
-        anticipation: 0.15
-    }, 
+//     strikeLeft: { 
+//         sample: 'sample/timpani-low.mp3', 
+//         anticipation: 0.15
+//     }, 
 
-    strikeRight: { 
-        sample: 'sample/timpani-high.mp3', 
-        anticipation: 0.3
-    }, 
+//     strikeRight: { 
+//         sample: 'sample/timpani-high.mp3', 
+//         anticipation: 0.3
+//     }, 
 
-    eyes: { 
-        position: { x: -5, y: -260 }, 
-        scale: 1.1
-    }, 
+//     eyes: { 
+//         position: { x: -5, y: -260 }, 
+//         scale: 1.1
+//     }, 
 
-    armLeft: {
-        texture: 'texture/slices_robot-big-arm-left.png', 
-        position: { x: -3, y: 1 }, 
-        animation: {
-            rotation: { file: 'json/robot-big-arm-left.json', layer: 'guy1 armL-rotation' }
-        }
-    }, 
+//     armLeft: {
+//         texture: 'texture/slices_robot-big-arm-left.png', 
+//         position: { x: -3, y: 1 }, 
+//         animation: {
+//             rotation: { file: 'json/robot-big-arm-left.json', layer: 'guy1 armL-rotation' }
+//         }
+//     }, 
 
-    stickLeft: {
-        texture: 'texture/slices_robot-big-stick-left.png', 
-        position: { x: -30, y: 24 }, 
-        animation: {
-            rotation: { file: 'json/robot-big-arm-left.json', layer: 'guy1 malletL-rotation' }
-        }
-    }, 
+//     stickLeft: {
+//         texture: 'texture/slices_robot-big-stick-left.png', 
+//         position: { x: -30, y: 24 }, 
+//         animation: {
+//             rotation: { file: 'json/robot-big-arm-left.json', layer: 'guy1 malletL-rotation' }
+//         }
+//     }, 
 
-    armRight: {
-        texture: 'texture/slices_robot-big-arm-right.png', 
-        position: { x: 105, y: 1 }, 
-        animation: {
-            rotation: { file: 'json/robot-big-arm-right.json', layer: 'guy1 armR-rotation' }, 
-        }
-    }, 
+//     armRight: {
+//         texture: 'texture/slices_robot-big-arm-right.png', 
+//         position: { x: 105, y: 1 }, 
+//         animation: {
+//             rotation: { file: 'json/robot-big-arm-right.json', layer: 'guy1 armR-rotation' }, 
+//         }
+//     }, 
 
-    stickRight: {
-        texture: 'texture/slices_robot-big-stick-right.png', 
-        position: { x: 25, y: 26 }, 
-        animation: {
-            rotation: { file: 'json/robot-big-arm-right.json', layer: 'guy1 malletR-rotation' }
-        }
-    }, 
+//     stickRight: {
+//         texture: 'texture/slices_robot-big-stick-right.png', 
+//         position: { x: 25, y: 26 }, 
+//         animation: {
+//             rotation: { file: 'json/robot-big-arm-right.json', layer: 'guy1 malletR-rotation' }
+//         }
+//     }, 
 
-    face: {
-        texture: 'texture/slices_robot-big-face.png', 
-        position: { x: -10, y: -265 }
-    }, 
+//     face: {
+//         texture: 'texture/slices_robot-big-face.png', 
+//         position: { x: -10, y: -265 }
+//     }, 
 
-    body: { 
-        texture: 'texture/slices_robot-big-body.png', 
-        position: { x: 220, y: 260 }
-    }, 
+//     body: { 
+//         texture: 'texture/slices_robot-big-body.png', 
+//         position: { x: 220, y: 260 }
+//     }, 
 
-    front: { 
-        texture: 'texture/slices_woodblocks.png', 
-        position: { x: 210, y: 460 }
-    }, 
+//     front: { 
+//         texture: 'texture/slices_woodblocks.png', 
+//         position: { x: 210, y: 460 }
+//     }, 
 
-    legs: { 
-        texture: 'texture/slices_robot-big-legs.png', 
-        position: { x: 210, y: 210 }
-    }
+//     legs: { 
+//         texture: 'texture/slices_robot-big-legs.png', 
+//         position: { x: 210, y: 210 }
+//     }
 
-};
+// };
 
 musicbox.config.woodblock.characterSmall = {
 
@@ -2331,26 +2331,26 @@ musicbox.config.woodblock.sequencer = {
 
     samples: [ 
         'assets/sample/robot-clave.mp3', 
-        'assets/sample/robot-high.mp3', 
-        'assets/sample/robot-low.mp3'
+        // 'assets/sample/robot-high.mp3', 
+        // 'assets/sample/robot-low.mp3'
     ], 
 
     symbols: [
         'assets/image/ui_woodblocks1.svg', 
-        'assets/image/ui_woodblocks2.svg', 
-        'assets/image/ui_woodblocks3.svg'
+        // 'assets/image/ui_woodblocks2.svg', 
+        // 'assets/image/ui_woodblocks3.svg'
     ], 
 
     order: [ 
         'small', 
-        'right', 
-        'left' 
+        // 'right', 
+        // 'left' 
     ], 
 
     tracks: [
         [1,0,0,0,0,0,1,0,1,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0]
+        // [0,0,0,0,0,0,0,0,0,0],
+        // [0,0,0,0,0,0,0,0,0,0]
     ]
 };
 //# sourceMappingURL=sourcemaps/lib.js.map

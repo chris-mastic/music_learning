@@ -35,7 +35,7 @@
 
     for ( var i in musicbox.config ) {
         var config = musicbox.config[ i ];
-        charAssets = charAssets.concat( musicbox.Character.getAssetList( config.characterBig ) );
+        // charAssets = charAssets.concat( musicbox.Character.getAssetList( config.characterBig ) );
         charAssets = charAssets.concat( musicbox.Character.getAssetList( config.characterSmall ) );
     }
 
@@ -79,13 +79,13 @@
             // Make character pairs
             // -------------------------------
 
-            var characterBig = new musicbox.Character( config.characterBig );
+            // var characterBig = new musicbox.Character( config.characterBig );
             var characterSmall = new musicbox.Character( config.characterSmall );
 
-            aaf.utils.extend( characterBig.container.position, config.characterBig.position );
+            // aaf.utils.extend( characterBig.container.position, config.characterBig.position );
             aaf.utils.extend( characterSmall.container.position, config.characterSmall.position );
             
-            var pair = new musicbox.CharacterPair( characterBig, characterSmall );
+            var pair = new musicbox.CharacterPair( characterSmall );
 
             // birds look weird when they look at eachother.
             if ( key === 'conga' ) {
@@ -145,7 +145,7 @@
             
             for ( var i = 0, l = pairs.length; i < l; i++ ) { 
                 pairs[ i ].characterSmall.stopBobbing();
-                pairs[ i ].characterBig.stopBobbing();
+                // pairs[ i ].characterBig.stopBobbing();
             }
 
         } );
@@ -155,7 +155,7 @@
             var pair = pairs[ prev ];
 
             if ( pair ) {
-                pair.characterBig.stopBobbing();
+                // pair.characterBig.stopBobbing();
                 pair.characterSmall.stopBobbing();
             }
 
@@ -278,7 +278,7 @@
 
             }
 
-            pair.characterBig.on( 'up', trigger );
+            // pair.characterBig.on( 'up', trigger );
             pair.characterSmall.on( 'up', trigger );
 
         } )
@@ -359,11 +359,11 @@
             var b = multiSequencer.activeSequencer.position * multiSequencer.activeSequencer.timeSignature;
 
             if ( multiSequencer.playing && multiSequencer.activeSequencerIndex === i ) {
-                pair.characterBig.setBob( b );
+                // pair.characterBig.setBob( b );
                 pair.characterSmall.setBob( b + 0.075 ); // offset so they're not perfectly in sync
             }
 
-            pair.characterBig.update();
+            // pair.characterBig.update();
             pair.characterSmall.update();
             
         }
