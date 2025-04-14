@@ -303,7 +303,7 @@
         var width = Math.min( 850, container.offsetHeight, container.offsetWidth );
 
         var ratio = ( width / 360 );
-        scale = 0.17 * ratio;
+        scale = 0.2 * ratio;
 
         pixi.setSize( container.offsetWidth, 280 * ratio );
         pixi.renderer.view.style.top = ( container.offsetHeight - 240 - pixi.height ) / 2 + 'px';
