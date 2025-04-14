@@ -852,7 +852,7 @@ musicbox.MultiSequencer = function (sequencers) {
         // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
         this.audio.src = `/assets/music/dynamics/1/1.mp3`;
         // this.audio.playbackRate = bpmArray[this.activeSequencerIndex][randomIndex - 1];
-        this.audio.playbackRate = 1.176;
+        this.audio.playbackRate = 1.176477;
         setTimeout(() => {
           audio.play();
         }, 35);
@@ -2093,8 +2093,8 @@ musicbox.config.timpani.sequencer = {
   ],
 
   tracks: [
-    [1, 1, 0, 1],
-    [1, 0, 1, 0],
+    [1, 0, 1, 1],
+    [0, 1, 0, 1],
   ],
 };
 musicbox.config.woodblock.characterBig = {
