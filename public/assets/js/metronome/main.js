@@ -59,7 +59,7 @@
             transparent: false, 
             width: container.offsetWidth, 
             height: 280, 
-            resolution: 2
+            resolution: 2,
         } );
 
         pairs = [];
@@ -161,7 +161,8 @@
 
         } );
 
-        container.appendChild( multiSequencer.domElement );
+        // container.appendChild( multiSequencer.domElement );
+        document.getElementById("multi_sequencer").appendChild(multiSequencer.domElement);
 
 
         // Get going!
@@ -303,7 +304,7 @@
         var width = Math.min( 850, container.offsetHeight, container.offsetWidth );
 
         var ratio = ( width / 360 );
-        scale = 0.2 * ratio;
+        scale = 0.35 * ratio;
 
         pixi.setSize( container.offsetWidth, 280 * ratio );
         pixi.renderer.view.style.top = ( container.offsetHeight - 240 - pixi.height ) / 2 + 'px';

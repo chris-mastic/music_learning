@@ -1,0 +1,90 @@
+#main {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  background-color: #f7f7f7;
+  margin: auto;
+}
+#canvas {
+  width: 600px;
+  height: 600px;
+}
+.row {
+  position: absolute;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+#init {
+  position: relative;
+  width: 60px;
+  top: 340px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+  transition: 0.3s background-color;
+  display: none;
+}
+#init:hover {
+  cursor: pointer;
+  background-color: #f8f8ff;
+}
+#range {
+  position: absolute;
+  top: 104px;
+  width: 60px;
+  height: 189px;
+}
+#BPMslider {
+  position: relative;
+  top: 30px;
+  left: 50px;
+  width: 10px;
+  height: 10px;
+}
+#BPMIcon {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 10px solid #f00;
+}
+#BPMnumber-show {
+  position: absolute;
+  top: 430px;
+  margin: auto;
+  height: 40px;
+  width: 120px;
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+h5{
+  font-family: 'Share Tech Mono', monospace;
+  color: #44C553;
+  font-size: 27px;
+}
+.tempo-show {
+  position: absolute;
+  display: flex;
+  top: 350px;
+  margin: auto;
+  width: 300px;
+  height: auto;
+  animation: slideInFromLeft 0.11s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
