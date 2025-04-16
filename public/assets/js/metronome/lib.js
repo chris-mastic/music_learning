@@ -886,11 +886,11 @@ musicbox.MultiSequencer = function( sequencers ) {
 
     this.setActiveSequencer( this.sequencers[ 0 ] );
 
-    this.playPause = document.createElement( 'div' );
+    this.playPause = document.createElement( 'button' );
     this.playPause.className = 'puck-button play-pause';
 
 
-    this.playPauseListener = new musicbox.PressListener( this.playPause, function() {
+    this.playPause.addEventListener( "click", function() {
 
         // ios needs Transport.start() in a touch event.
 
@@ -918,8 +918,9 @@ musicbox.MultiSequencer = function( sequencers ) {
             let speed = document.getElementById("BPMnumber").innerHTML / (67.99958882);
             
             this.audio.playbackRate = speed;
-            console.log(this.audio.playbackRate);
+            // console.log(this.audio.playbackRate);
             setTimeout(() => {
+                this.audio.volume = 0.5;
                 this.audio.play();
             }, 35);
             run();
@@ -2654,8 +2655,8 @@ class Needle {
     this.needleTip = [0, -300];
 
     // motion
-    this.bpm = 120;
-    this.angle = 0;
+    this.bpm = 80;
+    this.angle = 60 / (this.bpm / 60) / 2;
     this.dir = true;
   }
 
@@ -2783,13 +2784,16 @@ function run() {
   then = Date.now();
 
   startTime = then;
-  animate();
+//   setTimeout(() => {
+      animate();
+//   }, 100);
 }
 
 function stop() {
 
+    bpm = document.getElementById('BPMnumber').innerHTML;
   running = false;
-  needle.angle = 0;
+  needle.angle = 60 / (bpm / 60) / 2;
   ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
   display();
   needle.init_display();
@@ -2798,15 +2802,19 @@ function stop() {
 
 function toggleInit() {
 
+
   if (running) {
 
-    stop();
+    document.getElementsByClassName("play-pause")[0].click();
+    
+    // stop();
     btn.textContent = 'start';
-    needle.angle = 0;
+    // needle.angle = 0;
 
   } else if (!running) {
 
-    run();
+    document.getElementsByClassName("play-pause")[0].click();
+    // run();
     btn.textContent = 'stop';
   }
 }
@@ -2818,7 +2826,6 @@ range.addEventListener('mousemove', event => {
     if(mouseDown){
 
         cursorPos = Math.floor((event.clientY - 200)/1.2);
-        console.log(cursorPos);
         bpm = Math.floor((event.clientY - 138)/1.828) + 5;
         bpm = bpm - (bpm % 10);
         //   bpm = event.clientY;
@@ -2826,7 +2833,8 @@ range.addEventListener('mousemove', event => {
         ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
         display();
         needle.init_display();
-    
+
+        changeDescription(bpm);
       
     
         event.target.style.cursor = '-webkit-grab';
@@ -2849,15 +2857,45 @@ range.addEventListener('mousemove', event => {
 });;
 
 function changeDescription(bpm){
-    // desImg = document.getElementById('tempo-show');
-    // if(bpm < 60) {desImg.src = "/assets/image/metronome/lento.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 60 && bpm < 76) {desImg.src = "/assets/image/metronome/largo.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 76 && bpm < 98) {desImg.src = "/assets/image/metronome/adagio.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 98 && bpm < 111) {desImg.src = "/assets/image/metronome/andante.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 111 && bpm < 139) {desImg.src = "/assets/image/metronome/allegro.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 139 && bpm < 167) {desImg.src = "/assets/image/metronome/vivace.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
-    // else if (bpm >= 167 && bpm < 208) {desImg.src = "/assets/image/metronome/presto.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    const selectBox = document.getElementById('tempoSelect');
+    if(bpm < 60) selectBox.value= 'Largo';
+    else if (bpm >= 60 && bpm < 76) selectBox.value= 'Adagio';
+    else if (bpm >= 76 && bpm < 98) selectBox.value= 'Andante';
+    else if (bpm >= 98 && bpm < 111) selectBox.value= 'Moderato';
+    else if (bpm >= 111 && bpm < 139) selectBox.value= 'Allegro';
+    else if (bpm >= 139 && bpm < 167) selectBox.value= 'Vivace';
+    else if (bpm >= 167 && bpm < 208) selectBox.value= 'Presto';
 }
+
+function init_select(){
+    bpmNumber = document.getElementById("BPMnumber");
+    bpm = bpmNumber.innerHTML;
+    const selectBox = document.getElementById('tempoSelect');
+    if(bpm < 60) selectBox.value= 'Largo';
+    else if (bpm >= 60 && bpm < 76) selectBox.value= 'Adagio';
+    else if (bpm >= 76 && bpm < 98) selectBox.value= 'Andante';
+    else if (bpm >= 98 && bpm < 111) selectBox.value= 'Moderato';
+    else if (bpm >= 111 && bpm < 139) selectBox.value= 'Allegro';
+    else if (bpm >= 139 && bpm < 167) selectBox.value= 'Vivace';
+    else if (bpm >= 167 && bpm < 208) selectBox.value= 'Presto';
+    display();
+    needle.init_display();
+}
+init_select();
+
+document.getElementById('tempoSelect').addEventListener('change', () => {
+    bpmNumber = document.getElementById("BPMnumber");
+    const selected = document.getElementById('tempoSelect').value;
+    if(selected == "Largo") bpmNumber.innerHTML = 40;
+    else if (selected == "Adagio") bpmNumber.innerHTML = 60;
+    else if (selected == "Andante") bpmNumber.innerHTML = 80;
+    else if (selected == "Moderato") bpmNumber.innerHTML = 100;
+    else if (selected == "Allegro") bpmNumber.innerHTML = 120;
+    else if (selected == "Vivace") bpmNumber.innerHTML = 140;
+    else if (selected == "Presto") bpmNumber.innerHTML = 170;
+    display();
+    needle.init_display();
+});
 
 range.addEventListener('mousedown', () => {
   mouseDown = true;
@@ -2869,13 +2907,19 @@ range.addEventListener('mouseup', () => {
 //   toggleInit();
 });
 
-function mute(){
+
+document.getElementById('mute-btn').addEventListener('click', function () {
     this.audio = document.getElementById("bcAudio");
-    if(mute_config == 0){
+    const icon = document.getElementById("icon");
+    if(mute_config == 0){   
         this.audio.muted = true;
         mute_config = 1;
+        icon.classList.remove('fa-volume-high');
+        icon.classList.add('fa-volume-xmark');
     } else {
         this.audio.muted = false;
         mute_config = 0;
+        icon.classList.remove('fa-volume-xmark');
+        icon.classList.add('fa-volume-high');
     }
-}
+});

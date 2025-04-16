@@ -199,7 +199,7 @@ class Needle {
     this.needleTip = [0, -390];
 
     // motion
-    this.bpm = 120;
+    this.bpm = 80;
     this.angle = 0;
     this.dir = true;
   }

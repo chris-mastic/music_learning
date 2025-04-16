@@ -3,7 +3,7 @@
   <head>
     <title>Metronome</title>
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,8 +28,8 @@
     <nav class="navbar">
       <button class="nav-btn" onclick="location.href='/'">← Back</button>
       <span class="nav-title">Metronome</span>
-      <div>
-        <button class="mute-btn"><i class="fas fa-volume-up"></i></button>
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
+        <div id="mute-btn" style="cursor: pointer;"><i id = "icon" class="fa-solid fa-volume-high"></i></div>
         <button class="nav-btn" onclick="location.href='/metronome/help'">Help</button>
       </div>
     </nav>
@@ -48,7 +48,16 @@
               </div>
             </div>
             <div class="row">
-              <button onclick="mute()" id="init">Start</button>
+              <button id="init">Start</button>
+              <select id="tempoSelect" name="tempo">
+                <option value="Largo">Largo</option>
+                <option value="Adagio">Adagio</option>
+                <option value="Andante">Andante</option>
+                <option value="Moderato">Moderato</option>
+                <option value="Allegro">Allegro</option>
+                <option value="Vivace">Vivace</option>
+                <option value="Presto">Presto</option>
+              </select>
               <!-- <img id = "tempo-show" src="/assets/image/metronome/lento.png" alt="tempo_imnage"> -->
               <div id = "BPMnumber-show">
                 <h5>

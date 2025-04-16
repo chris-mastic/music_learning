@@ -122,8 +122,9 @@ input {
 }
 
 .metronome-area {
+  padding-top: 70px;
   width: 100%;
-  height: 720px;
+  height: 100%;
   background-color: #f7f7f7;
 }
 
@@ -164,6 +165,7 @@ input {
   background-color: #ffffff;
   background-image: url("../../image/ui_play.svg");
   border: 1px solid #ff6f6f;
+  display: none;
 }
 .playing .puck-button.play-pause,
 .suspended .puck-button.play-pause {
