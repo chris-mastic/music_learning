@@ -53,7 +53,7 @@
 }
 #BPMnumber-show {
   position: absolute;
-  top: 430px;
+  top: 460px;
   margin: auto;
   height: 40px;
   width: 120px;
@@ -68,13 +68,16 @@ h5{
   color: #44C553;
   font-size: 27px;
 }
-.tempo-show {
+#tempo-show {
   position: absolute;
   display: flex;
-  top: 350px;
+  top: 370px;
   margin: auto;
   width: 300px;
   height: auto;
+}
+
+.display-animation{
   animation: slideInFromLeft 0.11s ease-out forwards;
 }
 

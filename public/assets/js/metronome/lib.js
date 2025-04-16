@@ -2725,13 +2725,26 @@ range.addEventListener('mousemove', event => {
     Tone.Transport.bpm.value = bpm / 2;
     bpmNumber.innerHTML = bpm;
 
+    changeDescription(bpm);
+
     bcAudio = document.getElementById('bcAudio');
     bcAudio.playbackRate = bpm / 67.99958882;
 
   } else {
     slider.style.borderRightColor = 'red';
   }
-});
+});;
+
+function changeDescription(bpm){
+    desImg = document.getElementById('tempo-show');
+    if(bpm < 60) {desImg.src = "/assets/image/metronome/lento.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 60 && bpm < 76) {desImg.src = "/assets/image/metronome/largo.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 76 && bpm < 98) {desImg.src = "/assets/image/metronome/adagio.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 98 && bpm < 111) {desImg.src = "/assets/image/metronome/andante.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 111 && bpm < 139) {desImg.src = "/assets/image/metronome/allegro.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 139 && bpm < 167) {desImg.src = "/assets/image/metronome/vivace.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+    else if (bpm >= 167 && bpm < 208) {desImg.src = "/assets/image/metronome/presto.png"; desImg.classList.remove("display-animation"); desImg.classList.add("display-animation");}
+}
 
 range.addEventListener('mousedown', () => {
   mouseDown = true;
