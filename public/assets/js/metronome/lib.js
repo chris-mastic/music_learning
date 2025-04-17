@@ -2661,6 +2661,18 @@ class Needle {
   }
 
 
+    generateSound() {
+        let osc = audioCtx.createOscillator();
+
+        osc.frequency.value = 329.63;
+        osc.type = 'triangle';
+
+        osc.connect(masterVolume);
+        masterVolume.connect(audioCtx.destination);
+
+        osc.start(audioCtx.currentTime);
+        osc.stop(audioCtx.currentTime + 0.2);
+    }
 
   tick() {
 
@@ -2672,10 +2684,10 @@ class Needle {
 
     if (this.angle >= spread) {
       this.dir = false;
-    //   this.generateSound();
+      this.generateSound();
     } else if (this.angle <= -spread) {
       this.dir = true;
-    //   this.generateSound();
+      this.generateSound();
     }
   }
 
@@ -2906,6 +2918,7 @@ range.addEventListener('mouseup', () => {
   mouseDown = false;
 //   toggleInit();
 });
+
 
 
 document.getElementById('mute-btn').addEventListener('click', function () {

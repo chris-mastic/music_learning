@@ -24,7 +24,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  background: #999;
+  background: #f7f7f7;
   overflow: hidden;
 }
 input {
@@ -121,10 +121,18 @@ input {
   background-color: #f7f7f7;
 }
 
+/* .metronome-vast {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+  padding-top: 100px;
+} */
+
 .metronome-area {
   width: 100%;
-  height: 720px;
+  height: 1080px;
   background-color: #f7f7f7;
+  margin-top: 70px;
 }
 
 .puck-button {

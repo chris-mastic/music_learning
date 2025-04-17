@@ -36,38 +36,40 @@
     <div style="display: flex;width: 100%;height: 100%;">
       <div id="container" style="flex: 1;"></div>
       <div id="multi_sequencer" style="flex: 1;">
-        <div class="metronome-area">
-          <div id="main">
-            
-      
-            <div class="row">
-              <div id="range">
-                <div id="BPMslider">
-                  <div id="BPMIcon"></div>
+        <div class="metronome-vast">
+          <div class="metronome-area">
+            <div id="main">
+              
+        
+              <div class="row">
+                <div id="range">
+                  <div id="BPMslider">
+                    <div id="BPMIcon"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <button id="init">Start</button>
-              <select id="tempoSelect" name="tempo">
-                <option value="Largo">Largo</option>
-                <option value="Adagio">Adagio</option>
-                <option value="Andante">Andante</option>
-                <option value="Moderato">Moderato</option>
-                <option value="Allegro">Allegro</option>
-                <option value="Vivace">Vivace</option>
-                <option value="Presto">Presto</option>
-              </select>
-              <!-- <img id = "tempo-show" src="/assets/image/metronome/lento.png" alt="tempo_imnage"> -->
-              <div id = "BPMnumber-show">
-                <h5>
-                  BPM: 
-                </h5>
-                <h5 id="BPMnumber">80</h5>
+              <div class="row">
+                <button id="init">Start</button>
+                <select id="tempoSelect" name="tempo">
+                  <option value="Largo">Largo</option>
+                  <option value="Adagio">Adagio</option>
+                  <option value="Andante">Andante</option>
+                  <option value="Moderato">Moderato</option>
+                  <option value="Allegro">Allegro</option>
+                  <option value="Vivace">Vivace</option>
+                  <option value="Presto">Presto</option>
+                </select>
+                <!-- <img id = "tempo-show" src="/assets/image/metronome/lento.png" alt="tempo_imnage"> -->
+                <div id = "BPMnumber-show">
+                  <h5>
+                    BPM: 
+                  </h5>
+                  <h5 id="BPMnumber">80</h5>
+                </div>
               </div>
+        
+              <canvas id="canvas1" width="600" height="600"></canvas>
             </div>
-      
-            <canvas id="canvas1" width="600" height="600"></canvas>
           </div>
         </div>
       </div>
