@@ -30,19 +30,43 @@
   color: #ffffff;
   /* transition: 0.3s background-color; */
 }
+.button-group {
+  position: absolute;
+  margin: auto;
+  top: 750px;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+.mute-btn {
+  width: 140px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  background-color: #44C553;
+  cursor: pointer;
+  color: #fff;
+}
+.mute-btn:hover {
+  background-color: #6ec277;
+  color: #ffffff;
+}
 #init:hover {
   cursor: pointer;
   background-color: #42b03e;
+  border: none;
 }
 #tempoSelect {
   position: absolute;
   text-align: center;
-  width: 120px;
-  height: 40px;
-  top: 550px;
-  font-size: 1.3rem;
+  width: 100px;
+  height: 35px;
+  top: 505px;
+  font-size: 1.1rem;
   background-color: #222222;
   color: #44C553;
+  font-family: 'Share Tech Mono', monospace;
 }
 #range {
   position: absolute;
@@ -68,7 +92,7 @@
 }
 #BPMnumber-show {
   position: absolute;
-  top: 500px;
+  top: 550px;
   margin: auto;
   height: 40px;
   width: 120px;

@@ -5,6 +5,7 @@ musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 let mute_config = 0;
+let anim_mute_config = 1;
 
 
 musicbox.Animation = function( data, framerate ) {
@@ -23,12 +24,10 @@ musicbox.Animation.prototype.at = function( t, dim ) {
 
     var l = frame - frameLowIndex;
 
-    // console.log( frameLowIndex, frameHighIndex, l );
 
     var frameLow = this.data.frameData[ frameLowIndex ].val[ dim ];
     var frameHigh = this.data.frameData[ Math.min( this.data.frameData.length - 1, frameHighIndex ) ].val[ dim ];
 
-    // console.log( frameLow, frameHigh );
 
     return aaf.utils.math.lerp( frameLow, frameHigh, l );
 
@@ -901,7 +900,6 @@ musicbox.MultiSequencer = function( sequencers ) {
             // Tone.Transport.start();
             // just play it reaaaalllly quiet ( ios hack )
             this.activeSequencer.triggerSample( 2, 0.001 );
-            // console.log( this.activeSequencer.trackNames );
         }
 
         if(!this.audio){
@@ -912,22 +910,20 @@ musicbox.MultiSequencer = function( sequencers ) {
           if (this.playing) {
             let randomIndex = Math.floor(Math.random() * 4) + 1;
             // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
-            this.audio.src = `/assets/music/dynamics/1/1.mp3`;
+            this.audio.src = `/assets/music/dynamics/1/5.mp3`;
             // this.audio.playbackRate = bpmArray[this.activeSequencerIndex][randomIndex - 1];
             // this.audio.playbackRate = 1.176477;
-            let speed = document.getElementById("BPMnumber").innerHTML / (67.99958882);
+            let speed = document.getElementById("BPMnumber").innerHTML / (89.9);
             
             this.audio.playbackRate = speed;
             // console.log(this.audio.playbackRate);
             setTimeout(() => {
-                this.audio.volume = 0.5;
+                // this.audio.volume = 0.5;
                 this.audio.play();
-            }, 35);
-            run();
+            }, 139 * 80/89.9);
           }
           if(!this.playing){
             this.audio.pause();
-            stop();
           }
         
 
@@ -999,16 +995,15 @@ musicbox.MultiSequencer.prototype.next = function() {
 };
 
 musicbox.MultiSequencer.prototype.play = function() {
+    if(anim_mute_config){
 
-    this.domElement.classList.add( 'playing' );
-    this.domElement.classList.remove( 'suspended' );
-    this.activeSequencer.start();
+        this.domElement.classList.add( 'playing' );
+        this.domElement.classList.remove( 'suspended' );
+        this.activeSequencer.start();
+    }
     this.playing = true;
 
     this.fire( 'play' );
-
-
-
 };
 
 musicbox.MultiSequencer.prototype.pause = function( suspend ) {
@@ -2656,8 +2651,10 @@ class Needle {
 
     // motion
     this.bpm = 80;
-    this.angle = 60 / (this.bpm / 60) / 2;
+    this.angle = -45;
     this.dir = true;
+    this.prev = 0;
+    this.toggle = 1;
   }
 
 
@@ -2724,6 +2721,35 @@ class Needle {
     ctx.restore();
   }
 
+  init(startTimestamp) {
+    this.startTime = startTimestamp || performance.now();
+  }
+
+  updateAngle() {
+    const now = performance.now();
+    const elapsed = (now - this.startTime) / 1000; // in seconds
+    const bps = this.bpm / 60; // beats per second
+    const phase = elapsed * bps * Math.PI - Math.PI/2; // full swing
+
+    let maxAngle = 30;
+  
+    // Pendulum swing simulation using sine wave
+
+    this.angle = Math.sin(phase) * maxAngle;
+  
+    // Play sound at 0-crossings (when sine wave hits ~0)
+    this.cur = maxAngle - this.angle;
+    if(this.toggle * (this.cur - this.prev) < 0){
+        this.toggle = -this.toggle;
+        this.generateSound();
+        console.log(now);
+    }
+    this.prev = maxAngle - this.angle;
+
+    this.audio = document.getElementById("bcAudio");
+    // console.log(this.audio.playbackRate);
+  }
+
   init_display(){
     ctx.restore();
     ctx.save();
@@ -2782,8 +2808,12 @@ function animate() {
 
     ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
     display();
+    
+    // console.log(needle.angle);
     needle.display();
-    if (init) {needle.tick();}
+    if (init) {needle.updateAngle();}
+    // if (init) {needle.tick();}
+    
   }
 }
 
@@ -2796,6 +2826,7 @@ function run() {
   then = Date.now();
 
   startTime = then;
+  needle.init();
 //   setTimeout(() => {
       animate();
 //   }, 100);
@@ -2816,18 +2847,20 @@ function toggleInit() {
 
 
   if (running) {
+    // if(anim_mute_config){
+        document.getElementsByClassName("play-pause")[0].click();
+    // }
+    stop();
+    btn.textContent = 'Start';
 
-    document.getElementsByClassName("play-pause")[0].click();
-    
-    // stop();
-    btn.textContent = 'start';
-    // needle.angle = 0;
+    document.getElementById("animMute").style.backgroundColor = "#44C553";
 
   } else if (!running) {
 
     document.getElementsByClassName("play-pause")[0].click();
-    // run();
+    run();
     btn.textContent = 'stop';
+    document.getElementById("animMute").style.backgroundColor = "#777b77";
   }
 }
 
@@ -2835,38 +2868,36 @@ btn.addEventListener('click', toggleInit);
 
 range.addEventListener('mousemove', event => {
 
-    if(mouseDown){
+    if (!mouseDown) return;
 
-        cursorPos = Math.floor((event.clientY - 200)/1.2);
-        bpm = Math.floor((event.clientY - 138)/1.828) + 5;
-        bpm = bpm - (bpm % 10);
-        //   bpm = event.clientY;
-        
-        ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
-        display();
-        needle.init_display();
+    cursorPos = Math.floor((event.clientY - 200)/1.2);
+    bpm = Math.floor((event.clientY - 138)/1.828) + 5;
+    bpm = bpm - (bpm % 10);
+    //   bpm = event.clientY;
+    
+    ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
+    display();
+    needle.init_display();
 
-        changeDescription(bpm);
-      
-    
-        event.target.style.cursor = '-webkit-grab';
-        event.target.style.cursor = '-moz-grab';
-        event.target.style.cursor = 'grab';
-    
-        event.target.style.cursor = '-webkit-grabbing';
-        event.target.style.cursor = '-moz-grabbing';
-        event.target.style.cursor = 'grabbing';
-        needle.bpm = bpm;
-        bpmNumber = document.getElementById("BPMnumber");
-        Tone.Transport.bpm.value = bpm / 2;
-        bpmNumber.innerHTML = bpm;
-    
-        bcAudio = document.getElementById('bcAudio');
-        bcAudio.playbackRate = bpm / 67.99958882;
-    }
+    changeDescription(bpm);
     
 
-});;
+    event.target.style.cursor = '-webkit-grab';
+    event.target.style.cursor = '-moz-grab';
+    event.target.style.cursor = 'grab';
+
+    event.target.style.cursor = '-webkit-grabbing';
+    event.target.style.cursor = '-moz-grabbing';
+    event.target.style.cursor = 'grabbing';
+    needle.bpm = bpm;
+    bpmNumber = document.getElementById("BPMnumber");
+    Tone.Transport.bpm.value = bpm / 2;
+    bpmNumber.innerHTML = bpm;
+
+    bcAudio = document.getElementById('bcAudio');
+    bcAudio.playbackRate = bpm / 89.9;
+    
+});
 
 function changeDescription(bpm){
     const selectBox = document.getElementById('tempoSelect');
@@ -2909,6 +2940,10 @@ document.getElementById('tempoSelect').addEventListener('change', () => {
     needle.init_display();
 });
 
+range.addEventListener('mouseleave', () => {
+    mouseDown = false;
+});
+
 range.addEventListener('mousedown', () => {
   mouseDown = true;
 //   toggleInit();
@@ -2921,18 +2956,40 @@ range.addEventListener('mouseup', () => {
 
 
 
-document.getElementById('mute-btn').addEventListener('click', function () {
+document.getElementById('bcMute').addEventListener('click', function () {
     this.audio = document.getElementById("bcAudio");
-    const icon = document.getElementById("icon");
+    const icon = document.getElementById("mute-icon");
+    this.btn = document.getElementById("bcMute");
     if(mute_config == 0){   
         this.audio.muted = true;
         mute_config = 1;
-        icon.classList.remove('fa-volume-high');
-        icon.classList.add('fa-volume-xmark');
+        icon.classList.remove('fa-volume-xmark');
+        icon.classList.add('fa-volume-high');
+        document.getElementById("bcmute-text").textContent = "Unmute";
     } else {
         this.audio.muted = false;
         mute_config = 0;
-        icon.classList.remove('fa-volume-xmark');
-        icon.classList.add('fa-volume-high');
+        icon.classList.remove('fa-volume-high');
+        icon.classList.add('fa-volume-xmark');
+        document.getElementById("bcmute-text").textContent = "Mute";
+    }
+});
+
+document.getElementById('animMute').addEventListener('click', function () {
+    this.audio = document.getElementById("animMute");
+    const icon = document.getElementById("mute-icon1");
+    this.btn = document.getElementById("animMute");
+    if(anim_mute_config == 1){
+        if(document.getElementById("init").innerHTML == "Start"){
+            anim_mute_config = 0;
+            icon.classList.remove('fa-face-meh');
+            icon.classList.add('fa-face-grin-tears');
+            document.getElementById("animmute-text").textContent = "Unfreeze";
+        }
+    } else {
+        anim_mute_config = 1;
+        icon.classList.remove('fa-face-grin-tears');
+        icon.classList.add('fa-face-meh');
+        document.getElementById("animmute-text").textContent = "Freeze";
     }
 });

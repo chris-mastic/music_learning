@@ -29,7 +29,6 @@
       <button class="nav-btn" onclick="location.href='/'">← Back</button>
       <span class="nav-title">Metronome</span>
       <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-        <div id="mute-btn" style="cursor: pointer;"><i id = "icon" class="fa-solid fa-volume-high"></i></div>
         <button class="nav-btn" onclick="location.href='/metronome/help'">Help</button>
       </div>
     </nav>
@@ -50,6 +49,16 @@
               </div>
               <div class="row">
                 <button id="init">Start</button>
+                <div class="button-group">
+                  <button id="bcMute" class="mute-btn">
+                    <i id="mute-icon" class="fa-solid fa-volume-xmark" style="font-size: 17px;"></i>
+                    <span id="bcmute-text">Mute</span>
+                  </button>
+                  <button id="animMute" class="mute-btn">
+                    <i id="mute-icon1" class="fa-solid fa-face-meh" style="font-size: 17px;"></i>
+                    <span id="animmute-text">Freeze</span>
+                  </button>
+                </div>
                 <select id="tempoSelect" name="tempo">
                   <option value="Largo">Largo</option>
                   <option value="Adagio">Adagio</option>
