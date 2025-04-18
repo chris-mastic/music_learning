@@ -921,7 +921,7 @@ musicbox.MultiSequencer = function( sequencers ) {
             this.audio.playbackRate = speed;
             // console.log(this.audio.playbackRate);
             setTimeout(() => {
-                // this.audio.volume = 0.5;
+                this.audio.volume = 0.5;
                 this.audio.play();
             }, 139 * 80/89.9);
           }
@@ -2664,16 +2664,17 @@ class Needle {
 
 
     generateSound() {
-        let osc = audioCtx.createOscillator();
+        // let osc = audioCtx.createOscillator();
 
-        osc.frequency.value = 329.63;
-        osc.type = 'triangle';
+        // osc.frequency.value = 329.63;
+        // osc.type = 'triangle';
 
-        osc.connect(masterVolume);
-        masterVolume.connect(audioCtx.destination);
+        // osc.connect(masterVolume);
+        // masterVolume.connect(audioCtx.destination);
 
-        osc.start(audioCtx.currentTime);
-        osc.stop(audioCtx.currentTime + 0.2);
+        // osc.start(audioCtx.currentTime);
+        // osc.stop(audioCtx.currentTime + 0.2);
+        document.getElementById("tickAudio").play();
     }
 
   tick() {
@@ -2686,10 +2687,10 @@ class Needle {
 
     if (this.angle >= spread) {
       this.dir = false;
-      this.generateSound();
+    //   this.generateSound();
     } else if (this.angle <= -spread) {
       this.dir = true;
-      this.generateSound();
+    //   this.generateSound();
     }
   }
 
@@ -2731,9 +2732,6 @@ class Needle {
   }
 
   updateAngle() {
-
-
-
     const now = performance.now();
     const elapsed = (now - this.startTime) / 1000; // in seconds
     const bps = this.temp_bpm / 60; // beats per second
