@@ -6,6 +6,8 @@ musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 let mute_config = 0;
 let anim_mute_config = 1;
+let tempCharacter = null;
+let prevBpm = null;
 
 
 musicbox.Animation = function( data, framerate ) {
@@ -907,6 +909,7 @@ musicbox.MultiSequencer = function( sequencers ) {
             this.audio.loop = true;
           }
           this.playing ? this.pause() : this.play();
+					tempCharacter = this;
           if (this.playing) {
             let randomIndex = Math.floor(Math.random() * 4) + 1;
             // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
@@ -2651,10 +2654,12 @@ class Needle {
 
     // motion
     this.bpm = 80;
+    this.temp_bpm = 80;
     this.angle = -45;
     this.dir = true;
     this.prev = 0;
     this.toggle = 1;
+    this.audio = document.getElementById("bcAudio");
   }
 
 
@@ -2726,10 +2731,14 @@ class Needle {
   }
 
   updateAngle() {
+
+
+
     const now = performance.now();
     const elapsed = (now - this.startTime) / 1000; // in seconds
-    const bps = this.bpm / 60; // beats per second
+    const bps = this.temp_bpm / 60; // beats per second
     const phase = elapsed * bps * Math.PI - Math.PI/2; // full swing
+    console.log('debug phase', Math.sin(phase));
 
     let maxAngle = 30;
   
@@ -2738,15 +2747,20 @@ class Needle {
     this.angle = Math.sin(phase) * maxAngle;
   
     // Play sound at 0-crossings (when sine wave hits ~0)
+    
+
     this.cur = maxAngle - this.angle;
     if(this.toggle * (this.cur - this.prev) < 0){
         this.toggle = -this.toggle;
         this.generateSound();
-        console.log(now);
+        this.audio.playbackRate = this.bpm / 89.9;
+        this.temp_bpm = this.bpm;
+        tempCharacter.pause();
+        Tone.Transport.bpm.value = bpm / 2;
+        tempCharacter.play();
     }
     this.prev = maxAngle - this.angle;
-
-    this.audio = document.getElementById("bcAudio");
+    // this.audio = document.getElementById("bcAudio");
     // console.log(this.audio.playbackRate);
   }
 
@@ -2869,10 +2883,12 @@ btn.addEventListener('click', toggleInit);
 range.addEventListener('mousemove', event => {
 
     if (!mouseDown) return;
-
+		
     cursorPos = Math.floor((event.clientY - 200)/1.2);
     bpm = Math.floor((event.clientY - 138)/1.828) + 5;
     bpm = bpm - (bpm % 10);
+    if (bpm == prevBpm) return;
+    prevBpm = bpm;
     //   bpm = event.clientY;
     
     ctx.clearRect(0, 0, canvasDims.w, canvasDims.h);
@@ -2891,11 +2907,9 @@ range.addEventListener('mousemove', event => {
     event.target.style.cursor = 'grabbing';
     needle.bpm = bpm;
     bpmNumber = document.getElementById("BPMnumber");
-    Tone.Transport.bpm.value = bpm / 2;
-    bpmNumber.innerHTML = bpm;
-
-    bcAudio = document.getElementById('bcAudio');
-    bcAudio.playbackRate = bpm / 89.9;
+    
+    bpmNumber.innerHTML = bpm;		
+		// tempCharacter.pause();
     
 });
 
@@ -2946,12 +2960,11 @@ range.addEventListener('mouseleave', () => {
 
 range.addEventListener('mousedown', () => {
   mouseDown = true;
-//   toggleInit();
+//   toggleInit(); 
 });
 
 range.addEventListener('mouseup', () => {
   mouseDown = false;
-//   toggleInit();
 });
 
 
