@@ -920,10 +920,10 @@ musicbox.MultiSequencer = function( sequencers ) {
             
             this.audio.playbackRate = speed;
             // console.log(this.audio.playbackRate);
-            setTimeout(() => {
-                this.audio.volume = 0.5;
-                this.audio.play();
-            }, 139 * 80/89.9);
+            // setTimeout(() => {
+            this.audio.volume = 0.5;
+            this.audio.play();
+            // }, 139 * 80/89.9);
           }
           if(!this.playing){
             this.audio.pause();
@@ -2757,7 +2757,7 @@ class Needle {
         tempCharacter.pause();
         setTimeout(() => {
             tempCharacter.play();
-        }, 10);
+        }, 1);
         Tone.Transport.bpm.value = bpm / 2;
     }
     this.prev = maxAngle - this.angle;
