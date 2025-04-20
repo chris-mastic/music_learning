@@ -2751,11 +2751,14 @@ class Needle {
     if(this.toggle * (this.cur - this.prev) < 0){
         this.toggle = -this.toggle;
         this.generateSound();
+        this.bpm = document.getElementById('BPMnumber').innerHTML;
         this.audio.playbackRate = this.bpm / 89.9;
         this.temp_bpm = this.bpm;
         tempCharacter.pause();
+        setTimeout(() => {
+            tempCharacter.play();
+        }, 10);
         Tone.Transport.bpm.value = bpm / 2;
-        tempCharacter.play();
     }
     this.prev = maxAngle - this.angle;
     // this.audio = document.getElementById("bcAudio");
