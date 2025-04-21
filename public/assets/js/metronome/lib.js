@@ -2700,7 +2700,7 @@ function display() {
   ctx.save();
 
   ctx.strokeStyle = '#222';
-  ctx.lineWidth = 7;
+  ctx.lineWidth = 5;
 
   ctx.beginPath();
   ctx.moveTo(off1, off1);
