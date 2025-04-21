@@ -20,12 +20,12 @@
 #init {
   position: absolute;
   margin: auto;
-  width: 90px;
+  width: 100px;
   height: 50px;
-  border-radius: 15px;
+  border-radius: 10px;
   padding-bottom: 5px;
   padding-left: 3px;
-  top: 600px;
+  top: 605px;
   border: none;
   font-size: 30px;
   background-color: #ffffff;
@@ -74,18 +74,18 @@
 }
 #init:hover {
   cursor: pointer;
-  background-color: #c2d3e4;
+  background-color: #eeffec;
   border: none;
 }
 #tempoSelect {
   position: absolute;
   align-items: center;
-  width: 170px;
+  width: 140px;
   height: 40px;
   padding-left: 10px;
   padding-right: 24px; /* Adjust to shift arrow left */
-  top: 547px;
-  font-size: 1.5rem;
+  top: 555px;
+  font-size: 1.4rem;
   font-weight: 900;
   background-color: #ffffff;
   color: #000000;
@@ -103,8 +103,8 @@
 }
 #tempoDivider {
   position: absolute;
-  top: 549px;
-  left: 195px;
+  top: 557px;
+  left: 185px;
   width: 2px;
   height: 35px;
   background-color: rgba(128, 128, 128, 0.4); /* adjust opacity if needed */
@@ -134,10 +134,10 @@
 }
 #BPMnumber-show {
   position: absolute;
-  top: 495px;
+  top: 505px;
   margin: auto;
   height: 40px;
-  width: 120px;
+  width: 100px;
   background-color: #ffffff;
   display: flex;
   justify-content: center;
@@ -150,9 +150,9 @@
 h5{
   font-family: "Helvetica", Arial, sans-serif;
   color: #000000;
-  font-size: 27px;
+  font-size: 25px;
 }
-#tempo-show {
+#tempo-show { 
   position: absolute;
   display: flex;
   top: 370px;
