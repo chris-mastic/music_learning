@@ -20,59 +20,101 @@
 #init {
   position: absolute;
   margin: auto;
-  width: 170px;
+  width: 90px;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 15px;
+  padding-bottom: 5px;
+  padding-left: 3px;
   top: 600px;
   border: none;
   font-size: 30px;
-  background-color: #25ac20;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
   /* transition: 0.3s background-color; */
 }
 .button-group {
   position: absolute;
   margin: auto;
   top: 750px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  gap: 100px;
+  gap: 100px; */
 }
 .mute-btn {
   width: 140px;
   height: 50px;
   border-radius: 10px;
-  border: none;
+  border: 2px solid #222;
   font-size: 20px;
-  background-color: #44C553;
+  background-color: #fff;
   cursor: pointer;
-  color: #fff;
+  color: #000000;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
-.mute-btn:hover {
-  background-color: #6ec277;
-  color: #ffffff;
+#animMute {
+  position: absolute;
+  left: 420px;
+  top: 750px;
+  z-index: 9999;
+  width: 140px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid #222;
+  font-size: 20px;
+  background-color: #fff;
+  cursor: pointer;
+  color: #000000;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+.mute-btn:hover, #animMute:hover {
+  /* background-color: #a5ffad; */
+  /* border: none; */
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 #init:hover {
   cursor: pointer;
-  background-color: #42b03e;
+  background-color: #c2d3e4;
   border: none;
 }
 #tempoSelect {
   position: absolute;
-  text-align: center;
-  width: 100px;
-  height: 35px;
-  top: 505px;
-  font-size: 1.1rem;
-  background-color: #222222;
-  color: #44C553;
+  align-items: center;
+  width: 170px;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 24px; /* Adjust to shift arrow left */
+  top: 547px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: #ffffff;
+  color: #000000;
   font-family: 'Share Tech Mono', monospace;
+  font-style: italic;
+  /* border: 3px solid #222; */
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  appearance: none; /* Optional: removes default arrow for full control */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="10" viewBox="0 0 24 24" width="10" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 4px center; /* 👈 Adjusts arrow left */
+  background-size: 30px;
 }
+#tempoDivider {
+  position: absolute;
+  top: 549px;
+  left: 195px;
+  width: 2px;
+  height: 35px;
+  background-color: rgba(128, 128, 128, 0.4); /* adjust opacity if needed */
+}
+
 #range {
   position: absolute;
   top: 140px;
-  width: 60px;
-  height: 189px;
+  width: 100px;
+  height: 195px;
 }
 #BPMslider {
   position: relative;
@@ -92,19 +134,22 @@
 }
 #BPMnumber-show {
   position: absolute;
-  top: 550px;
+  top: 495px;
   margin: auto;
   height: 40px;
   width: 120px;
-  background-color: #222222;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 3px;
+  /* border: 3px solid #222; */
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 h5{
   font-family: 'Share Tech Mono', monospace;
-  color: #44C553;
+  color: #000000;
   font-size: 27px;
 }
 #tempo-show {

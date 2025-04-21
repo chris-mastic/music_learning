@@ -757,36 +757,36 @@ musicbox.CharacterPair = function( charSmall ) {
     this.small = this.small.bind( this );
 
 
-    this.adoringLookTimeline = new TimelineMax( {
-        onComplete: this.onAdoringLookComplete, 
-        onCompleteScope: this
-    } );
+    // this.adoringLookTimeline = new TimelineMax( {
+    //     onComplete: this.onAdoringLookComplete, 
+    //     onCompleteScope: this
+    // } );
 
-    if ( aaf.common.url.look ) {
-        this.adoringLookTimeline.delay( 1 );
-    } else { 
-        this.adoringLookTimeline.delay( 5 );
-    }
+    // if ( aaf.common.url.look ) {
+    //     this.adoringLookTimeline.delay( 1 );
+    // } else { 
+    //     this.adoringLookTimeline.delay( 5 );
+    // }
 
     // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.2, { x: 25 * 2, y: 9 * 2, ease: Quad.inOut }, 0 );
     // this.adoringLookTimeline.to( this.characterBig.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
 
-    this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: -20 * 2, y: -5 * 2, ease: Quad.inOut }, 0 );
-    this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
+    // this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: -20 * 2, y: -5 * 2, ease: Quad.inOut }, 0 );
+    // this.adoringLookTimeline.to( this.characterSmall.lookDirection, 1.0, { x: 0, y: 0, ease: Quad.inOut }, 3.0 );
 
 };
 
-musicbox.CharacterPair.prototype.onAdoringLookComplete = function() {
+// musicbox.CharacterPair.prototype.onAdoringLookComplete = function() {
 
-    if ( aaf.common.url.look ) {
-        this.adoringLookTimeline.delay( 1 );
-    } else { 
-        this.adoringLookTimeline.delay( aaf.random( 15, 30 ) );
-    }
+//     if ( aaf.common.url.look ) {
+//         this.adoringLookTimeline.delay( 1 );
+//     } else { 
+//         this.adoringLookTimeline.delay( aaf.random( 15, 30 ) );
+//     }
 
-    this.adoringLookTimeline.restart( true );
+//     this.adoringLookTimeline.restart( true );
 
-};
+// };
 
 musicbox.CharacterPair.prototype.left = function( t ) {
     // this.characterBig.strikeLeft( t );
@@ -1663,8 +1663,8 @@ musicbox.Sequencer.prototype.toggleBeat = function( track, beat, el ) {
 musicbox.config.conga.characterSmall = {
 
     position: { 
-        x: 380, 
-        y: 390, 
+        x: 420, 
+        y: 350, 
     }, 
 
     eyes: { 
@@ -1869,8 +1869,8 @@ musicbox.config.conga.sequencer = {
 musicbox.config.kit.characterSmall = {
 
     position: { 
-        x: 360, 
-        y: 380, 
+        x: 420, 
+        y: 320, 
     }, 
 
     eyes: { 
@@ -2074,8 +2074,8 @@ musicbox.config.kit.sequencer = {
 musicbox.config.timpani.characterSmall = {
 
     position: { 
-        x: 380, 
-        y: 500, 
+        x: 450, 
+        y: 470, 
     }, 
     
     eyes: {
@@ -2277,8 +2277,8 @@ musicbox.config.timpani.sequencer = {
 musicbox.config.woodblock.characterSmall = {
 
     position: { 
-        x: 380, 
-        y: 500, 
+        x: 450, 
+        y: 460, 
     }, 
 
     strikeBoth: {
@@ -2394,8 +2394,8 @@ masterVolume = audioCtx.createGain(),
 btn = document.getElementById('init'),
 range = document.getElementById('range');
 canvasHeight = 700;
-range.style.height = 300*(canvasHeight/700) + 'px';
-range.style.top = 150 *(canvasHeight/700) + 'px';
+range.style.height = 320*(canvasHeight/700) + 'px';
+range.style.top = 140 *(canvasHeight/700) + 'px';
 
 let mouseDown = false,
 running = false,
@@ -2409,7 +2409,7 @@ masterVolume.connect(audioCtx.destination);
 let cursorY = 0;
 function display() {
 
-  let barSize = [30, 5],
+  let barSize = [20, 5],
   { w: cW, h: cH } = canvasDims,
   off1 = 100,
   off2 = 20,
@@ -2431,11 +2431,11 @@ function display() {
 
   ctx.save();
 
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = '#000';
 
   ctx.beginPath();
-  ctx.moveTo(off1, off1);
-  ctx.lineTo(cW - off1, off1);
+  ctx.moveTo(off1, off1 + 20);
+  ctx.lineTo(cW - off1, off1 + 20);
   ctx.lineTo(cW - off2, cH - off2 - 10);
   ctx.lineTo(cW - off2 - 10, cH - off2);
   ctx.lineTo(off2 + 10, cH - off2);
@@ -2450,15 +2450,13 @@ function display() {
 
   ctx.save();
 
-  ctx.fillStyle = 'goldenrod';
+  ctx.fillStyle = 'rgb(255, 255, 255)';
 
   ctx.beginPath();
-  ctx.moveTo(off1, off1);
-  ctx.lineTo(cW / 2, off1);
-  ctx.lineTo(cW / 2, cH - off2 - 10);
-  ctx.lineTo(cW - off2 - 10, cH - off2);
-  ctx.lineTo(off2 + 10, cH - off2);
-  ctx.lineTo(off2, cH - off2 - 10);
+  ctx.moveTo(off1 + 9, off1 + 27);
+  ctx.lineTo(cW - off1 - 11, off1 + 27);
+  ctx.lineTo(cW - off1 - 11, cH - off2);
+  ctx.lineTo(off1 + 9 , cH - off2 - 10);
   ctx.closePath();
 
   ctx.fill();
@@ -2466,43 +2464,105 @@ function display() {
   ctx.restore();
 
 
-  ctx.save();
+  // *** TOP_COLOR ***
 
-  ctx.fillStyle = 'rgb(2, 255, 61)';
+    ctx.save();
+    ctx.fillStyle = 'rgb(199, 126, 83)';
+    ctx.beginPath();
+    ctx.moveTo(off1, off1 + 20);
+    ctx.lineTo(cW - off1, off1 + 20);
+    ctx.lineTo(cW - off1 -3.5, off1);
+    ctx.lineTo(cW / 2, off1 - 20);
+    ctx.lineTo(off1 + 3.5, off1);
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.restore();
+
+    // ctx.save();
+    // ctx.fillStyle = '#222';
+    // ctx.textAlign = 'center';
+    // ctx.font = '24px avenir';
+    // ctx.fillText("S", cW /2 , 110);
+
+    // ctx.restore();
+
+
+    ctx.save();
+    ctx.fillStyle = 'rgb(217, 242, 208)';
+
+    stand_x = 109;
+    ctx.beginPath();
+    ctx.moveTo(cW / 2 + 39, 65 + 60);
+    ctx.lineTo(cW / 2, 65 + 60);
+    ctx.lineTo(cW / 2, 95 + 45);
+    ctx.lineTo(cW / 2 + 39, 95 + 45);
+    ctx.fill();
+
+  for ( let i = 40; i <= 230; i += 10) {
+    ctx.save();
+    if(i % 20){
+        stand_x = cW / 2 + 39;
+    } else {
+        stand_x = 109;
+    }
+
+    if (i >= 76 && i < 98) ctx.fillStyle = 'rgb(179, 229, 161)';
+    else if (i >= 98 && i < 111) ctx.fillStyle = 'rgb(179, 229, 161)';
+    else if (i >= 111 && i < 139) ctx.fillStyle = 'rgb(142, 216, 115)';
+    else if (i >= 139 && i < 167) ctx.fillStyle = 'rgb(113, 213, 76)';
+    else if (i >= 167) ctx.fillStyle = 'rgb(72, 202, 25)';
+    ctx.globalAlpha = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(stand_x, 65 + i *1.5);
+    ctx.lineTo(cW / 2, 65 + i *1.5);
+    ctx.lineTo(cW / 2, 95 + i * 1.5);
+    ctx.lineTo(stand_x, 95 + i * 1.5);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  ctx.fillStyle = 'orange';
 
   const bpm = document.getElementById('BPMnumber').innerHTML;
 
 
-    if(bpm % 20){
-        stand_x = cW / 2 + 55;
-    } else {
-        stand_x = 100;
-    }
+  if(bpm >= 40 && bpm <= 200){
 
-    ctx.globalAlpha = bpm/200;
-
-    ctx.beginPath();
-    ctx.moveTo(stand_x, 65 + bpm *1.5);
-    ctx.lineTo(cW / 2, 65 + bpm *1.5);
-    ctx.lineTo(cW / 2, 95 + bpm * 1.5);
-    ctx.lineTo(stand_x, 95 + bpm * 1.5);
-    ctx.fill();
-
-    ctx.restore();
+      if(bpm % 20){
+          stand_x = cW / 2 + 39;
+      } else {
+          stand_x = 109;
+      }
+  
+      ctx.globalAlpha = 1;
+  
+      ctx.beginPath();
+      ctx.moveTo(stand_x, 65 + bpm *1.5);
+      ctx.lineTo(cW / 2, 65 + bpm *1.5);
+      ctx.lineTo(cW / 2, 95 + bpm * 1.5);
+      ctx.lineTo(stand_x, 95 + bpm * 1.5);
+      ctx.fill();
+  
+      ctx.restore();
+  }
 
 
     
 
     ctx.save();
-    for (i = 40; i <= 200; i += 10){
+    for (i = 30; i <= 200; i += 10){
 
         ctx.lineWidth = 1;
         ctx.save();
 
         if(i % 20){
-            stand_x = cW / 2 + 55;
+            stand_x = cW / 2 + 37;
         } else {
-            stand_x = 100;
+            stand_x = 110;
         }
 
     
@@ -2515,6 +2575,8 @@ function display() {
         ctx.restore();
     }
     ctx.restore();
+
+    
 
 
   // ***DRAW_MARKS***
@@ -2534,9 +2596,9 @@ function display() {
     barSize[0],
     barSize[1]);
 
-    ctx.fillText(10 * i, posX - 17, posY + 6);
+    ctx.fillText(10 * i, posX - 15, posY + 6);
     ctx.save();
-    ctx.fillStyle = 'darkgray';
+    ctx.fillStyle = '#555';
     ctx.fillRect(
     posXMid,
     posY + 15,
@@ -2549,7 +2611,7 @@ function display() {
   for (let i = 5; i < 21; i += 2) {
     let posY = 15 * i;
 
-    ctx.fillText(10 * i, posX + 45, posY + 6);
+    ctx.fillText(10 * i, posX + 33, posY + 6);
     ctx.save();
 
     ctx.restore();
@@ -2573,11 +2635,28 @@ function display() {
 
   ctx.restore();
 
-  // *** COLOR_BOTTOM ***
+  ctx.save();
+
+  ctx.fillStyle = 'rgb(80, 80, 80)';
+  ctx.strokeStyle = 'rgb(184, 184, 184)';
+
+  ctx.beginPath();
+  ctx.moveTo(off1 + 48, off1 + 25);
+  ctx.lineTo(cW - off1 - 48, off1 + 25);
+  ctx.lineTo(cW - off1 - 48, cH - off2);
+  ctx.lineTo(off1 + 48, cH - off2 - 10);
+  ctx.closePath();
+
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.restore();
+
+  // *** COLOR_BOTTOM ***`  
 
   ctx.save();
 
-  ctx.fillStyle = 'chocolate';
+  ctx.fillStyle = 'rgb(199, 126, 83)';
   ctx.lineWidth = 10;
 
   ctx.beginPath();
@@ -2594,7 +2673,6 @@ function display() {
   ctx.restore();
 
   // *** DRAW_FEET ***
-
   ctx.save();
 
   ctx.fillStyle = '#222';
@@ -2616,15 +2694,17 @@ function display() {
 
   ctx.restore();
 
-  // *** DRAW_BORDER ***
+ 
+//   *** DRAW_BORDER ***
 
   ctx.save();
 
-  ctx.strokeStyle = 'darkslategray';
-  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#222';
+  ctx.lineWidth = 7;
 
   ctx.beginPath();
   ctx.moveTo(off1, off1);
+  ctx.lineTo(cW / 2, off1 -20)
   ctx.lineTo(cW - off1, off1);
   ctx.lineTo(cW - off2, cH - off2 - 10);
   ctx.lineTo(cW - off2 - 10, cH - off2);
@@ -2700,6 +2780,7 @@ class Needle {
     this.needleOrigin[0],
     this.needleOrigin[1]);
 
+    
     ctx.rotate(Math.PI / 180 * this.angle);
 
     ctx.fillStyle = '#ccc';
@@ -2718,13 +2799,22 @@ class Needle {
 
     ctx.beginPath();
     ctx.moveTo(-10, Math.round(-330 + bpm * 1.8 / 1.2));
-    ctx.lineTo(-10, Math.round(-350 + bpm * 1.8 / 1.2));
-    ctx.lineTo(10, Math.round(-350 + bpm * 1.8 / 1.2));
+    ctx.lineTo(-15, Math.round(-350 + bpm * 1.8 / 1.2));
+    ctx.lineTo(15, Math.round(-350 + bpm * 1.8 / 1.2));
     ctx.lineTo(10, Math.round(-330 + bpm * 1.8 / 1.2));
+    ctx.closePath();
     ctx.fill();
-    ctx.strokeRect(-10, -350 + bpm * 1.8 / 1.2, 20, 20);
+    ctx.stroke();
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.lineTo(-10, Math.round(-350 + bpm * 1.8 / 1.2 + 6));
+    ctx.lineTo(0, Math.round(-350 + bpm * 1.8 / 1.2) + 12);
+    ctx.lineTo(10, Math.round(-350 + bpm * 1.8 / 1.2 + 6));
+    ctx.stroke();
 
     ctx.restore();
+
+    
   }
 
   init(startTimestamp) {
@@ -2788,11 +2878,19 @@ class Needle {
 
     ctx.beginPath();
     ctx.moveTo(-10, Math.round(-330 + bpm * 1.8 / 1.2));
-    ctx.lineTo(-10, Math.round(-350 + bpm * 1.8 / 1.2));
-    ctx.lineTo(10, Math.round(-350 + bpm * 1.8 / 1.2));
+    ctx.lineTo(-15, Math.round(-350 + bpm * 1.8 / 1.2));
+    ctx.lineTo(15, Math.round(-350 + bpm * 1.8 / 1.2));
     ctx.lineTo(10, Math.round(-330 + bpm * 1.8 / 1.2));
+    ctx.closePath();
     ctx.fill();
-    ctx.strokeRect(-10, -350 + bpm * 1.8 / 1.2, 20, 20);
+    ctx.stroke();
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.lineTo(-10, Math.round(-350 + bpm * 1.8 / 1.2 + 6));
+    ctx.lineTo(0, Math.round(-350 + bpm * 1.8 / 1.2) + 12);
+    ctx.lineTo(10, Math.round(-350 + bpm * 1.8 / 1.2 + 6));
+    ctx.stroke();
+    // ctx.strokeRect(-10, -350 + bpm * 1.8 / 1.2, 20, 20);
 
     ctx.restore();
   }
@@ -2866,16 +2964,18 @@ function toggleInit() {
         document.getElementsByClassName("play-pause")[0].click();
     // }
     stop();
-    btn.textContent = 'Start';
+    btn.innerHTML = '▶';
 
-    document.getElementById("animMute").style.backgroundColor = "#44C553";
+    document.getElementById("animMute").style.backgroundColor = "#fff";
+    document.getElementById("animMute").style.border = "2px solid #222";
 
   } else if (!running) {
 
     document.getElementsByClassName("play-pause")[0].click();
     run();
-    btn.textContent = 'stop';
-    document.getElementById("animMute").style.backgroundColor = "#777b77";
+    btn.innerHTML = '⏸';
+    document.getElementById("animMute").style.backgroundColor = "#eee";
+    document.getElementById("animMute").style.border = 'none';
   }
 }
 
@@ -2886,9 +2986,9 @@ range.addEventListener('mousemove', event => {
     if (!mouseDown) return;
 		
     cursorPos = Math.floor((event.clientY - 200)/1.2);
-    bpm = Math.floor((event.clientY - 138)/1.828) + 5;
+    bpm = Math.floor((event.clientY - 118.5)/1.9875);
     bpm = bpm - (bpm % 10);
-    if (bpm == prevBpm) return;
+    // if (bpm == prevBpm) return;
     prevBpm = bpm;
     //   bpm = event.clientY;
     
@@ -2994,7 +3094,7 @@ document.getElementById('animMute').addEventListener('click', function () {
     const icon = document.getElementById("mute-icon1");
     this.btn = document.getElementById("animMute");
     if(anim_mute_config == 1){
-        if(document.getElementById("init").innerHTML == "Start"){
+        if(document.getElementById("init").innerHTML == "▶"){
             anim_mute_config = 0;
             icon.classList.remove('fa-face-meh');
             icon.classList.add('fa-face-grin-tears');

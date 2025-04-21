@@ -89,7 +89,7 @@
 
             // birds look weird when they look at eachother.
             if ( key === 'conga' ) {
-                pair.adoringLookTimeline.clear()
+                // pair.adoringLookTimeline.clear()
             }
 
             // for clicking the characters, remember which arm is which track.
@@ -304,7 +304,7 @@
         var width = Math.min( 850, container.offsetHeight, container.offsetWidth );
 
         var ratio = ( width / 360 );
-        scale = 0.35 * ratio;
+        scale = 0.3 * ratio;
 
         pixi.setSize( container.offsetWidth, 280 * ratio );
         pixi.renderer.view.style.top = ( container.offsetHeight - 240 - pixi.height ) / 2 + 'px';
