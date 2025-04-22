@@ -859,6 +859,7 @@ musicbox.EasyPIXI.prototype.setSize = function( width, height ) {
     this.height = height;
 
     this.renderer.resize( width, height );
+    document.getElementById('animMute').style.left = width/2 - 80 + 'px';
     this.renderer.view.style.width = width + 'px';
     this.renderer.view.style.height = height + 'px';
 
@@ -2431,7 +2432,7 @@ function display() {
 
   ctx.save();
 
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = '#E4D9CC';
 
   ctx.beginPath();
   ctx.moveTo(off1, off1 + 20);
@@ -2623,7 +2624,7 @@ function display() {
 
   ctx.save();
 
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'rgb(78, 7, 7)';
   ctx.beginPath();
   ctx.arc(
   needleOrigin[0] / 2,
@@ -2675,7 +2676,7 @@ function display() {
   // *** DRAW_FEET ***
   ctx.save();
 
-  ctx.fillStyle = '#222';
+  ctx.fillStyle = 'rgb(78, 7, 7)';
 
   ctx.beginPath();
   ctx.arc(
@@ -2699,7 +2700,7 @@ function display() {
 
   ctx.save();
 
-  ctx.strokeStyle = '#222';
+  ctx.strokeStyle = 'rgb(78, 7, 7)';
   ctx.lineWidth = 5;
 
   ctx.beginPath();
@@ -2826,7 +2827,6 @@ class Needle {
     const elapsed = (now - this.startTime) / 1000; // in seconds
     const bps = this.temp_bpm / 60; // beats per second
     const phase = elapsed * bps * Math.PI - Math.PI/2; // full swing
-    console.log('debug phase', Math.sin(phase));
 
     let maxAngle = 30;
   
@@ -2836,21 +2836,23 @@ class Needle {
   
     // Play sound at 0-crossings (when sine wave hits ~0)
     
-
-    this.cur = maxAngle - this.angle;
-    if(this.toggle * (this.cur - this.prev) < 0){
+    
+    this.cur = this.angle;
+    // if(this.toggle * (this.cur - this.prev) < 0){
+    if((this.cur > 20 && this.prev < 20) || (this.cur < -20 && this.prev > -20)){
+        console.log('here', this.angle);
+        tempCharacter.pause();
+        setTimeout(() => {
+            tempCharacter.play();
+        }, 1);
         this.toggle = -this.toggle;
         this.generateSound();
         this.bpm = document.getElementById('BPMnumber').innerHTML;
         this.audio.playbackRate = this.bpm / 89.9;
         this.temp_bpm = this.bpm;
-        tempCharacter.pause();
-        setTimeout(() => {
-            tempCharacter.play();
-        }, 1);
         Tone.Transport.bpm.value = bpm / 2;
     }
-    this.prev = maxAngle - this.angle;
+    this.prev = this.angle;
     // this.audio = document.getElementById("bcAudio");
     // console.log(this.audio.playbackRate);
   }
@@ -2964,7 +2966,7 @@ function toggleInit() {
         document.getElementsByClassName("play-pause")[0].click();
     // }
     stop();
-    btn.innerHTML = '▶';
+    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
 
     document.getElementById("animMute").style.backgroundColor = "#fff";
     document.getElementById("animMute").style.border = "2px solid #222";
@@ -2973,7 +2975,7 @@ function toggleInit() {
 
     document.getElementsByClassName("play-pause")[0].click();
     run();
-    btn.innerHTML = '⏸';
+    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
     document.getElementById("animMute").style.backgroundColor = "#eee";
     document.getElementById("animMute").style.border = 'none';
   }
@@ -3094,7 +3096,7 @@ document.getElementById('animMute').addEventListener('click', function () {
     const icon = document.getElementById("mute-icon1");
     this.btn = document.getElementById("animMute");
     if(anim_mute_config == 1){
-        if(document.getElementById("init").innerHTML == "▶"){
+        if(document.getElementById("init").innerHTML == '<i class="fa-solid fa-play"></i>'){
             anim_mute_config = 0;
             icon.classList.remove('fa-face-meh');
             icon.classList.add('fa-face-grin-tears');
