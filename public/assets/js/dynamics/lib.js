@@ -5,7 +5,27 @@ musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 let volumeLevel = 0;
-const bpmArray = [[2,2,2,2],[2,2,2,2],[2,2,2,2],[2,2,2,2]];
+const bpmArray = 
+[[0.8049, 0.6667,  1.19403,  0.80496],
+[1, 0.99138,  0.83592,  0.65516],
+[1, 1.01,  1.2,  1],
+[0.958, 0.90284,  0.96185,  0.99072]];
+const delayArray = 
+[[400,  100,  115,  200],
+[400, 450,  116,  100],
+[60, 51,  500,  35],
+[400., 100,  348,  548]];
+const intervalArray = 
+[[20, 31, 30,  105],
+[125, 320,  209,  169],
+[48,  34, 196,  34],
+[53, 137,  206,  28]];
+
+// const volumeArray = 
+// [[1, 0.1, 2,  2],
+// [20000, 20000,  20000,  20000],
+// [20000,  20000, 20000,  20000],
+// [20000, 20000,  20000,  20000]];
 
 let sequencerArr = [];
 let isStart = 0;
@@ -848,18 +868,36 @@ musicbox.MultiSequencer = function (sequencers) {
       }
       this.playing ? this.pause() : this.play();
       if (this.playing) {
-        let randomIndex = Math.floor(Math.random() * 4) + 1;
-        // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex}.mp3`;
-        this.audio.src = `/assets/music/dynamics/1/1.mp3`;
+        let randomIndex = Math.floor(Math.random() * 4);
+        this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex + 1}.mp3`;
+        // this.audio.src = `/assets/music/dynamics/1/4.mp3`;
+
         // this.audio.playbackRate = bpmArray[this.activeSequencerIndex][randomIndex - 1];
-        this.audio.playbackRate = 1.176477;
+        const row_array = this.activeSequencerIndex;
+        const column_array = randomIndex;
+        this.audio.playbackRate = bpmArray[row_array][column_array];
+
+        const startAndLoopAudio = () => {
+          this.audio.currentTime = 0;
+          this.audio.play();
+      
+          // After 30 seconds, stop and restart
+          this.loopTimeout = setTimeout(() => {
+            if (this.playing) {
+              this.audio.pause();
+              startAndLoopAudio(); // Restart again
+            }
+          }, (intervalArray[row_array][column_array] - intervalArray[row_array][column_array] % (1.5 / (this.activeSequencerIndex + 1))) * 1000);
+        };
+        // Start after optional delay
         setTimeout(() => {
-          audio.play();
-        }, 35);
-        this.audio.play();
+          startAndLoopAudio();
+        }, delayArray[row_array][column_array]);
+          
       }
       if(!this.playing){
         this.audio.pause();
+        clearTimeout(this.loopTimeout);
       }
     }.bind(this)
   );
@@ -1224,7 +1262,7 @@ function onBlinking(number) {
 
   // Control volume of background music
   this.audio = document.getElementById("bcAudio");
-  this.audio.volume = bcLevel;
+  this.audio.volume = bcLevel * 0.3;
 }
 
 // UI
@@ -1653,7 +1691,7 @@ musicbox.config.conga.characterBig = {
 musicbox.config.conga.sequencer = {
   beats: 8,
   timeSignature: 6,
-  bpm: 160,
+  bpm: 80,
 
   samples: [
     // 'assets/sample/conga-cowbell.mp3',
@@ -1858,7 +1896,7 @@ musicbox.config.kit.characterBig = {
 musicbox.config.kit.sequencer = {
   beats: 4,
   timeSignature: 4,
-  bpm: 80,
+  bpm: 40,
 
   samples: [
     "assets/sample/kit-hat.mp3",
@@ -2072,7 +2110,7 @@ musicbox.config.timpani.characterBig = {
 musicbox.config.timpani.sequencer = {
   beats: 4,
   timeSignature: 3,
-  bpm: 40,
+  bpm: 20,
 
   samples: [
     // 'assets/sample/timpani-triangle.mp3',
@@ -2093,8 +2131,8 @@ musicbox.config.timpani.sequencer = {
   ],
 
   tracks: [
-    [1, 0, 1, 1],
-    [0, 1, 0, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
   ],
 };
 musicbox.config.woodblock.characterBig = {
@@ -2277,7 +2315,7 @@ musicbox.config.woodblock.characterBig = {
 musicbox.config.woodblock.sequencer = {
   beats: 8,
   timeSignature: 5,
-  bpm: 120,
+  bpm: 60,
 
   samples: [
     // 'assets/sample/robot-clave.mp3',
