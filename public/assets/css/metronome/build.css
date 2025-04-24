@@ -24,7 +24,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  background: #f7f7f7;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
   overflow: hidden;
 }
 input {
@@ -35,7 +35,6 @@ input {
   user-select: default;
 }
 #container {
-  background: #fff;
   position: relative;
   /* margin-top: -40px; */
   height: 100%;
@@ -73,7 +72,7 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background-color: #fff;
+  background: linear-gradient(60deg, rgb(72, 49, 163) 0%, rgb(1, 137, 155) 100%);
   box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
   position: sticky;
@@ -82,6 +81,7 @@ input {
 }
 
 .nav-title {
+  color: white;
   font-weight: bold;
   font-size: 24px;
 }
@@ -118,7 +118,6 @@ input {
   position: relative;
   flex: 1;
   display: flex;
-  background-color: #f7f7f7;
 }
 
 /* .metronome-vast {
@@ -131,7 +130,7 @@ input {
 .metronome-area {
   width: 100%;
   height: 1080px;
-  background-color: #f7f7f7;
+  /* background-color: #db9696; */
 }
 
 .puck-button {
@@ -143,7 +142,7 @@ input {
   -webkit-background-size: 90%;
   -moz-background-size: 90%;
   background-size: 90%;
-  background: #fff url("../../image/ui_play.svg") center center no-repeat;
+  background: #a8d8fc url("../../image/ui_play.svg") center center no-repeat;
   -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
   -moz-transition: -moz-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
   -o-transition: -o-transform 0.1s cubic-bezier(0.38, 1.8, 0.32, 1);
@@ -245,7 +244,6 @@ input {
   filter: alpha(opacity=0);
 }
 .multi-sequencer {
-  background-color: #f7f7f7;
   right: 0;
   width: 100%;
   height: 100%;
@@ -444,3 +442,4 @@ input {
   -ms-transform: scale(1);
   transform: scale(1);
 }
+

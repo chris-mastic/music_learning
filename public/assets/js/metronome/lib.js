@@ -95,8 +95,8 @@ musicbox.Carousel.prototype.setActive = function( index ) {
     this.activeChildIndex = index;
     this.targetXPosition = -this.activeChildIndex * this.childWidth;
 
-    this.prevButton.classList.toggle( 'hidden', this.activeChildIndex === 0 );
-    this.nextButton.classList.toggle( 'hidden', this.activeChildIndex === this.children.length - 1 );
+    // this.prevButton.classList.toggle( 'hidden', this.activeChildIndex === 0 );
+    // this.nextButton.classList.toggle( 'hidden', this.activeChildIndex === this.children.length - 1 );
 
 };
 
@@ -814,8 +814,8 @@ musicbox.EasyPIXI = function( options ) {
 
         antialiasing: aaf.common.ua.pixelRatio === 1, 
         resolution: aaf.common.ua.pixelRatio, 
-        backgroundColor: 0xffffff,
-        transparent: false,
+        // backgroundColor: 0x3e1ac8,
+        transparent: true,
 
         container: document.getElementById( 'container' )
 
@@ -825,10 +825,10 @@ musicbox.EasyPIXI = function( options ) {
     PIXI.ticker.shared.stop();
 
     this.renderer = PIXI.autoDetectRenderer( options.width, options.height, {
-        antialiasing: options.antialiasing, 
-        transparent: options.transparent, 
+        antialias: true, 
+        transparent: true,
         resolution: options.resolution, 
-        backgroundColor: options.backgroundColor
+        // backgroundColor: options.backgroundColor,
     } );
 
     this.stage = new PIXI.Container();
@@ -862,7 +862,6 @@ musicbox.EasyPIXI.prototype.setSize = function( width, height ) {
     document.getElementById('animMute').style.left = width/2 - 80 + 'px';
     this.renderer.view.style.width = width + 'px';
     this.renderer.view.style.height = height + 'px';
-
 };
 
 musicbox.EasyPIXI.prototype.render = function() {
@@ -2839,7 +2838,7 @@ class Needle {
     
     this.cur = this.angle;
     // if(this.toggle * (this.cur - this.prev) < 0){
-    if((this.cur > 20 && this.prev < 20) || (this.cur < -20 && this.prev > -20)){
+    if((this.cur > 25 && this.prev < 25) || (this.cur < -25 && this.prev > -25)){
         console.log('here', this.angle);
         tempCharacter.pause();
         setTimeout(() => {
@@ -3082,12 +3081,18 @@ document.getElementById('bcMute').addEventListener('click', function () {
         icon.classList.remove('fa-volume-xmark');
         icon.classList.add('fa-volume-high');
         document.getElementById("bcmute-text").textContent = "Unmute";
+        // if(musicbox.Character.playing){
+            stopAnimation();
+        // }
     } else {
         this.audio.muted = false;
         mute_config = 0;
         icon.classList.remove('fa-volume-high');
         icon.classList.add('fa-volume-xmark');
         document.getElementById("bcmute-text").textContent = "Mute";
+        // if(musicbox.Character.playing){
+            restartAnimation();
+        // }
     }
 });
 
@@ -3109,3 +3114,20 @@ document.getElementById('animMute').addEventListener('click', function () {
         document.getElementById("animmute-text").textContent = "Freeze";
     }
 });
+
+
+const waves = document.querySelectorAll(".parallax > use");
+
+// Function to stop the animation
+function stopAnimation() {
+  waves.forEach(wave => {
+    wave.style.animation = 'none'; // Remove animation
+  });
+}
+
+// Function to restart the animation
+function restartAnimation() {
+  waves.forEach(wave => {
+    wave.style.animation = ''; // Re-apply animation
+  });
+}

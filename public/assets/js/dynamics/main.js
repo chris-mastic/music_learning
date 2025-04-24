@@ -410,21 +410,17 @@
     if (carousel.activeChildIndex < carousel.children.length - 1) {
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
-      //Remove Next
+
       carousel.next();
       multiSequencer.setActiveSequencer(
         multiSequencer.sequencers[carousel.activeChildIndex]
       );
-      // if (wasPlaying) {
-      //   setTimeout(function () {
-      //     multiSequencer.play();
-      //   }, 50);
-      // }
+
     }
   }
 
   function prev() {
-    if (carousel.activeChildIndex > 0) {
+    if (carousel.activeChildIndex >+ 0) {
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       carousel.prev();

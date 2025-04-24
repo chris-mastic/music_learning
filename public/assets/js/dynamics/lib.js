@@ -110,11 +110,11 @@ musicbox.Carousel.prototype.setActive = function (index) {
   this.activeChildIndex = index;
   this.targetXPosition = -this.activeChildIndex * this.childWidth;
 
-  this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
-  this.nextButton.classList.toggle(
-    "hidden",
-    this.activeChildIndex === this.children.length - 1
-  );
+  // this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
+  // this.nextButton.classList.toggle(
+  //   "hidden",
+  //   this.activeChildIndex === this.children.length - 1
+  // );
 };
 
 musicbox.Carousel.prototype.grab = function () {
@@ -784,8 +784,8 @@ musicbox.EasyPIXI = function (options) {
 
     antialiasing: aaf.common.ua.pixelRatio === 1,
     resolution: aaf.common.ua.pixelRatio,
-    backgroundColor: 0xffffff,
-    transparent: false,
+    // backgroundColor: 0xffffff,
+    transparent: true,
 
     container: document.getElementById("container"),
   });
@@ -794,8 +794,8 @@ musicbox.EasyPIXI = function (options) {
   PIXI.ticker.shared.stop();
 
   this.renderer = PIXI.autoDetectRenderer(options.width, options.height, {
-    antialiasing: options.antialiasing,
-    transparent: options.transparent,
+    antialias: true,
+    transparent: true,
     resolution: options.resolution,
     backgroundColor: options.backgroundColor,
   });
@@ -1247,10 +1247,17 @@ function onBlinking(number) {
   zones[number % 4].classList.add("blinking");
   let bcLevel = 0.1;
   if (zones[number % 4].getAttribute("data-index")) {
+
     // If the zone has a data-index attribute, use it to determine volume
+
     const zoneIndex = parseInt(zones[number % 4].getAttribute("data-index"));
-    volumeLevel = -12 + (zoneIndex * 2); // Adjust formula as needed
-    bcLevel = 0.1 + (zoneIndex * 0.1);
+
+    // Adjust formula as needed
+
+    volumeLevel = -12 + (zoneIndex * 2); 
+    bcLevel = 0.2 + ((zoneIndex-1) * 0.15);
+  
+
   } else {
     volumeLevel = 0;
   }
@@ -1262,7 +1269,8 @@ function onBlinking(number) {
 
   // Control volume of background music
   this.audio = document.getElementById("bcAudio");
-  this.audio.volume = bcLevel * 0.3;
+  this.audio.volume = bcLevel ;
+  console.log(bcLevel);
 }
 
 // UI

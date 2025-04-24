@@ -35,7 +35,6 @@ input {
   user-select: default;
 }
 #container {
-  background: #fff;
   position: relative;
   margin-top: -40px;
   height: 100%;
@@ -71,7 +70,7 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background-color: #fff;
+  background: linear-gradient(60deg, rgb(72, 49, 163) 0%, rgb(1, 137, 155) 100%);
   box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
   position: sticky;
@@ -80,6 +79,7 @@ input {
 }
 
 .nav-title {
+  color: white;
   font-weight: bold;
   font-size: 24px;
 }
@@ -138,7 +138,7 @@ input {
 }
 .puck-button.play-pause {
   margin-left: -30px;
-  bottom: 213px;
+  bottom: 243px;
   left: 50%;
   background-image: url("../../image/ui_play.svg");
 }
@@ -215,11 +215,8 @@ input {
   filter: alpha(opacity=0);
 }
 .multi-sequencer {
-  background-color: #f7f7f7;
   width: 100%;
   height: 240px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.125);
   position: absolute;
   bottom: 0;
   z-index: 1;
@@ -412,3 +409,78 @@ input {
   -ms-transform: scale(1);
   transform: scale(1);
 }
+
+
+
+.wave-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+/* wave-anim */
+.wave-anim {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color: white;
+}
+
+.inner-wave-anim {
+  display: flex;
+  padding-top: 40vh;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  width: 100%;
+}
+
+.logo {
+  width: 50px;
+  fill: white;
+  margin-right: 15px;
+}
+
+/* Waves */
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  min-height: 100px;
+  max-height: 150px;
+  margin-bottom: -7px; /* fix safari gap */
+}
+
+/* Content below waves */
+.content_blank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  background: #fff;
+  text-align: center;
+}
+
+/* Parallax animation */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) { animation-delay: -2s;  animation-duration: 7s;  }
+.parallax > use:nth-child(2) { animation-delay: -3s;  animation-duration: 10s; }
+.parallax > use:nth-child(3) { animation-delay: -4s;  animation-duration: 13s; }
+.parallax > use:nth-child(4) { animation-delay: -5s;  animation-duration: 20s; }
+
+@keyframes move-forever {
+  0%   { transform: translate3d(-90px, 0, 0); }
+  100% { transform: translate3d(85px, 0, 0); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .waves { height: 40px; min-height: 40px; }
+  .content_blank { height: 30vh; }
+  h1 { font-size: 24px; }
+}
+
