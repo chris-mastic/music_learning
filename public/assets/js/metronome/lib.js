@@ -2838,7 +2838,7 @@ class Needle {
     
     this.cur = this.angle;
     // if(this.toggle * (this.cur - this.prev) < 0){
-    if((this.cur > 25 && this.prev < 25) || (this.cur < -25 && this.prev > -25)){
+    if((this.cur > 26 && this.prev < 26) || (this.cur < -26 && this.prev > -26)){
         console.log('here', this.angle);
         tempCharacter.pause();
         setTimeout(() => {

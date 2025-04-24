@@ -10,11 +10,13 @@ const bpmArray =
 [1, 0.99138,  0.83592,  0.65516],
 [1, 1.01,  1.2,  1],
 [0.958, 0.90284,  0.96185,  0.99072]];
+
 const delayArray = 
 [[400,  100,  115,  200],
 [400, 450,  116,  100],
 [60, 51,  500,  35],
 [400., 100,  348,  548]];
+
 const intervalArray = 
 [[20, 31, 30,  105],
 [125, 320,  209,  169],
@@ -110,11 +112,11 @@ musicbox.Carousel.prototype.setActive = function (index) {
   this.activeChildIndex = index;
   this.targetXPosition = -this.activeChildIndex * this.childWidth;
 
-  // this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
-  // this.nextButton.classList.toggle(
-  //   "hidden",
-  //   this.activeChildIndex === this.children.length - 1
-  // );
+  this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
+  this.nextButton.classList.toggle(
+    "hidden",
+    this.activeChildIndex === this.children.length - 1
+  );
 };
 
 musicbox.Carousel.prototype.grab = function () {
