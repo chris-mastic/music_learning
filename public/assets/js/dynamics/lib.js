@@ -7,7 +7,7 @@ musicbox.config.conga = {};
 let volumeLevel = 0;
 var selectedCharacter = 0;
 const bpmArray = 
-[[0.85714, 0.89552,  0.923,  1],
+[[0.9285, 0.97015,  1,  1.0833],
 [1, 0.99138,  0.83592,  1.1765],
 [1, 1.01,  1.2,  0.9375],
 [0.958, 0.90284,  0.96185,  0.99072]];
@@ -2135,7 +2135,7 @@ musicbox.config.timpani.characterBig = {
 musicbox.config.timpani.sequencer = {
   beats: 4,
   timeSignature: 3,
-  bpm: 30,
+  bpm: 32.5,
 
   samples: [
     // 'assets/sample/timpani-triangle.mp3',
