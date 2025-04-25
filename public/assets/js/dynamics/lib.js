@@ -1286,7 +1286,7 @@ function onBlinking(number) {
 
   // Control volume of background music
   this.audio = document.getElementById("bcAudio");
-  this.audio.volume = bcLevel * 0.5;
+  this.audio.volume = bcLevel * 0.25;
   console.log(bcLevel);
 }
 
