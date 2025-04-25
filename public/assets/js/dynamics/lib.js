@@ -5,6 +5,7 @@ musicbox.config.kit = {};
 musicbox.config.woodblock = {};
 musicbox.config.conga = {};
 let volumeLevel = 0;
+var selectedCharacter = 0;
 const bpmArray = 
 [[0.8049, 0.6667,  1.19403,  0.80496],
 [1, 0.99138,  0.83592,  0.65516],
@@ -112,11 +113,11 @@ musicbox.Carousel.prototype.setActive = function (index) {
   this.activeChildIndex = index;
   this.targetXPosition = -this.activeChildIndex * this.childWidth;
 
-  this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
-  this.nextButton.classList.toggle(
-    "hidden",
-    this.activeChildIndex === this.children.length - 1
-  );
+  // this.prevButton.classList.toggle("hidden", this.activeChildIndex === 0);
+  // this.nextButton.classList.toggle(
+  //   "hidden",
+  //   this.activeChildIndex === this.children.length - 1
+  // );
 };
 
 musicbox.Carousel.prototype.grab = function () {
@@ -141,6 +142,8 @@ musicbox.Carousel.prototype.next = function () {
   this.audio.pause()
 
   this.setActive(index);
+  selectedCharacter = (selectedCharacter + 1) % 4;
+  placeBPM();
 };
 
 musicbox.Carousel.prototype.prev = function () {
@@ -152,6 +155,8 @@ musicbox.Carousel.prototype.prev = function () {
   this.audio.pause()
 
   this.setActive(index);
+  selectedCharacter = (selectedCharacter + 3) % 4;
+  placeBPM();
 };
 
 musicbox.Carousel.prototype.update = function () {
@@ -871,30 +876,36 @@ musicbox.MultiSequencer = function (sequencers) {
       this.playing ? this.pause() : this.play();
       if (this.playing) {
         let randomIndex = Math.floor(Math.random() * 4);
-        this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex + 1}.mp3`;
-        // this.audio.src = `/assets/music/dynamics/1/4.mp3`;
 
-        // this.audio.playbackRate = bpmArray[this.activeSequencerIndex][randomIndex - 1];
+        // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex + 1}.mp3`;
+        this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${document.getElementById("songSelect").value}.mp3`;
+
+        console.log(document.getElementById("songSelect").value);
+
+
+
         const row_array = this.activeSequencerIndex;
         const column_array = randomIndex;
-        this.audio.playbackRate = bpmArray[row_array][column_array];
+        // this.audio.playbackRate = bpmArray[row_array][column_array];
+        this.audio.playbackRate = document.getElementById("songBPM").value;
 
         const startAndLoopAudio = () => {
           this.audio.currentTime = 0;
           this.audio.play();
       
           // After 30 seconds, stop and restart
-          this.loopTimeout = setTimeout(() => {
-            if (this.playing) {
-              this.audio.pause();
-              startAndLoopAudio(); // Restart again
-            }
-          }, (intervalArray[row_array][column_array] - intervalArray[row_array][column_array] % (1.5 / (this.activeSequencerIndex + 1))) * 1000);
+          // this.loopTimeout = setTimeout(() => {
+          // if (this.playing) {
+          //   this.audio.pause();
+          //   startAndLoopAudio(); // Restart again
+          // }
+          // }, (intervalArray[row_array][column_array] - intervalArray[row_array][column_array] % (1.5 / (this.activeSequencerIndex + 1))) * 1000);
         };
         // Start after optional delay
-        setTimeout(() => {
+        this.loopTimeout = setTimeout(() => {
           startAndLoopAudio();
-        }, delayArray[row_array][column_array]);
+        // }, delayArray[row_array][column_array]);
+        }, document.getElementById("songDelay").value);
           
       }
       if(!this.playing){
@@ -919,6 +930,10 @@ aaf.utils.Events.mixTo(musicbox.MultiSequencer.prototype);
 
 musicbox.MultiSequencer.prototype.update = function () {
   if (this.playing) this.activeSequencer.update();
+};
+
+musicbox.MultiSequencer.prototype.placeSong = function () {
+  console.log("hi");
 };
 
 musicbox.MultiSequencer.prototype.setActiveSequencer = function (seq) {
@@ -1271,7 +1286,7 @@ function onBlinking(number) {
 
   // Control volume of background music
   this.audio = document.getElementById("bcAudio");
-  this.audio.volume = bcLevel ;
+  this.audio.volume = bcLevel * 0.5;
   console.log(bcLevel);
 }
 
@@ -2350,4 +2365,22 @@ musicbox.config.woodblock.sequencer = {
     [1, 1, 1, 1, 1, 1, 1, 1],
   ],
 };
+
+document.getElementById("songSelect").addEventListener("change", function () {
+  placeBPM();
+});
+
+placeBPM();
+function placeBPM() {
+  selectedSong = document.getElementById("songSelect").value;
+  songBPM = bpmArray[selectedCharacter][selectedSong - 1];
+  songDelay = delayArray[selectedCharacter][selectedSong - 1];
+
+  document.getElementById("songBPM").value = songBPM;
+  document.getElementById("songDelay").value = songDelay;
+  // const songBPM = bpmArray[musicbox.MultiSequencer.activeSequencerIndex][selectedSong - 1];
+}
+
+
 //# sourceMappingURL=sourcemaps/lib.js.map
+

@@ -407,7 +407,7 @@
   }
 
   function next() {
-    if (carousel.activeChildIndex < carousel.children.length - 1) {
+    if (carousel.activeChildIndex <= carousel.children.length - 1) {
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
 
@@ -420,7 +420,7 @@
   }
 
   function prev() {
-    if (carousel.activeChildIndex >+ 0) {
+    if (carousel.activeChildIndex >= 0) {
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       carousel.prev();

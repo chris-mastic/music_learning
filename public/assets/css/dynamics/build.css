@@ -78,6 +78,17 @@ input {
   z-index: 100;
 }
 
+.song-adjust {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  left: 100px;
+  top: 100px;
+}
+
 .nav-title {
   color: white;
   font-weight: bold;

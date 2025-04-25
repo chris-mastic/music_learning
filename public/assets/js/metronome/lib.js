@@ -8,6 +8,7 @@ let mute_config = 0;
 let anim_mute_config = 1;
 let tempCharacter = null;
 let prevBpm = null;
+selectedCharacter = 0;
 
 
 musicbox.Animation = function( data, framerate ) {
@@ -126,6 +127,7 @@ musicbox.Carousel.prototype.next = function() {
     index %= this.children.length;
 
     this.setActive( index );
+    selectedCharacter = (selectedCharacter + 1) % 4;
 
 };
 
@@ -137,7 +139,7 @@ musicbox.Carousel.prototype.prev = function() {
     }
 
     this.setActive( index );
-
+    selectedCharacter = (selectedCharacter + 3) % 4;
 };
 
 musicbox.Carousel.prototype.update = function() {
@@ -2838,14 +2840,18 @@ class Needle {
     
     this.cur = this.angle;
     // if(this.toggle * (this.cur - this.prev) < 0){
-    if((this.cur > 26 && this.prev < 26) || (this.cur < -26 && this.prev > -26)){
-        console.log('here', this.angle);
+    
+    const angle_cur = 26;
+    if((this.cur > angle_cur && this.prev < angle_cur) || (this.cur < -angle_cur && this.prev > -angle_cur)){
         tempCharacter.pause();
         setTimeout(() => {
             tempCharacter.play();
         }, 1);
         this.toggle = -this.toggle;
-        this.generateSound();
+        
+        setTimeout(() => {
+            this.generateSound();
+        }, document.getElementById("setMetronomeDelay").value);
         this.bpm = document.getElementById('BPMnumber').innerHTML;
         this.audio.playbackRate = this.bpm / 89.9;
         this.temp_bpm = this.bpm;
