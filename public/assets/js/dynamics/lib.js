@@ -1273,7 +1273,7 @@ function onBlinking(number) {
     // Adjust formula as needed
 
     volumeLevel = -12 + (zoneIndex * 2); 
-    bcLevel = 0.2 + ((zoneIndex-1) * 0.15);
+    bcLevel = 0.03 + ((zoneIndex-1) * 0.2);
   
 
   } else {
@@ -1287,7 +1287,7 @@ function onBlinking(number) {
 
   // Control volume of background music
   this.audio = document.getElementById("bcAudio");
-  this.audio.volume = bcLevel * 0.25;
+  this.audio.volume = bcLevel;
   console.log(bcLevel);
 }
 

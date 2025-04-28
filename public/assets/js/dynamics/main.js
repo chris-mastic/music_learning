@@ -412,10 +412,10 @@
       if (wasPlaying) multiSequencer.pause();
 
       carousel.next();
+      resize()
       multiSequencer.setActiveSequencer(
         multiSequencer.sequencers[carousel.activeChildIndex]
       );
-
     }
   }
 
@@ -424,6 +424,7 @@
       var wasPlaying = multiSequencer.playing; //Tone.Transport.state === Tone.State.Started;
       if (wasPlaying) multiSequencer.pause();
       carousel.prev();
+      resize()
       multiSequencer.setActiveSequencer(
         multiSequencer.sequencers[carousel.activeChildIndex]
       );

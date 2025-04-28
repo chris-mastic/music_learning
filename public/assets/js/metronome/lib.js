@@ -9,6 +9,7 @@ let anim_mute_config = 1;
 let tempCharacter = null;
 let prevBpm = null;
 selectedCharacter = 0;
+let timeDelay = 70;
 
 
 musicbox.Animation = function( data, framerate ) {
@@ -922,10 +923,10 @@ musicbox.MultiSequencer = function( sequencers ) {
             
             this.audio.playbackRate = speed;
             // console.log(this.audio.playbackRate);
-            // setTimeout(() => {
-            this.audio.volume = 0.5;
-            this.audio.play();
-            // }, 139 * 80/89.9);
+            setTimeout(() => {
+                this.audio.volume = 0.5;
+                this.audio.play();
+            }, 100);
           }
           if(!this.playing){
             this.audio.pause();
@@ -1665,7 +1666,7 @@ musicbox.Sequencer.prototype.toggleBeat = function( track, beat, el ) {
 musicbox.config.conga.characterSmall = {
 
     position: { 
-        x: 420, 
+        x: 380, 
         y: 350, 
     }, 
 
@@ -2840,13 +2841,17 @@ class Needle {
     
     this.cur = this.angle;
     // if(this.toggle * (this.cur - this.prev) < 0){
+
+    // if (selectedCharacter == 0) timeDelay = 1;
     
     const angle_cur = 26;
     if((this.cur > angle_cur && this.prev < angle_cur) || (this.cur < -angle_cur && this.prev > -angle_cur)){
         tempCharacter.pause();
+        // const timeDelay = 70;
+        console.log(timeDelay);
         setTimeout(() => {
             tempCharacter.play();
-        }, 1);
+        }, timeDelay);
         this.toggle = -this.toggle;
         
         setTimeout(() => {
