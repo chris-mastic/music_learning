@@ -2847,8 +2847,10 @@ class Needle {
     const angle_cur = 26;
     if((this.cur > angle_cur && this.prev < angle_cur) || (this.cur < -angle_cur && this.prev > -angle_cur)){
         tempCharacter.pause();
-        // const timeDelay = 70;
-        console.log(timeDelay);
+        if(selectedCharacter == 0) timeDelay = 1;
+        else timeDelay = 70;
+        console.log(selectedCharacter);
+        // console.log(timeDelay);
         setTimeout(() => {
             tempCharacter.play();
         }, timeDelay);
