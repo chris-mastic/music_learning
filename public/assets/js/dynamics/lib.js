@@ -1273,7 +1273,7 @@ function onBlinking(number) {
     // Adjust formula as needed
 
     volumeLevel = -12 + (zoneIndex * 2); 
-    bcLevel = 0.03 + ((zoneIndex-1) * 0.2);
+    bcLevel = 0.03 + ((zoneIndex-1) * 0.19);
   
 
   } else {
