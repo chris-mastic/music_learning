@@ -9,7 +9,7 @@ let anim_mute_config = 1;
 let tempCharacter = null;
 let prevBpm = null;
 selectedCharacter = 0;
-let timeDelay = 70;
+let timeDelay = 1;
 
 
 musicbox.Animation = function( data, framerate ) {
@@ -2847,10 +2847,10 @@ class Needle {
     const angle_cur = 26;
     if((this.cur > angle_cur && this.prev < angle_cur) || (this.cur < -angle_cur && this.prev > -angle_cur)){
         tempCharacter.pause();
-        if(selectedCharacter == 0) timeDelay = 1;
-        else timeDelay = 70;
+        if(selectedCharacter != 0) timeDelay = 70;
+        else timeDelay = 120;
         console.log(selectedCharacter);
-        // console.log(timeDelay);
+        console.log(timeDelay);
         setTimeout(() => {
             tempCharacter.play();
         }, timeDelay);
