@@ -7,16 +7,16 @@ musicbox.config.conga = {};
 let volumeLevel = 0;
 var selectedCharacter = 0;
 const bpmArray = 
-[[0.9285, 0.97015,  1,  1.0833],
-[1, 0.99138,  0.83592,  1.1765],
-[1, 1.01,  1.2,  0.9375],
-[0.958, 0.90284,  0.96185,  0.99072]];
+[[0.97015, 1.0833],
+[1],
+[1.2],
+[0.90284]];
 
 const delayArray = 
-[[400,  100,  115,  200],
-[400, 450,  116,  100],
-[60, 51,  500,  35],
-[400., 100,  348,  548]];
+[[200, 0],
+[400],
+[450],
+[100]];;
 
 const intervalArray = 
 [[20, 31, 30,  105],
@@ -875,7 +875,8 @@ musicbox.MultiSequencer = function (sequencers) {
       }
       this.playing ? this.pause() : this.play();
       if (this.playing) {
-        let randomIndex = Math.floor(Math.random() * 4);
+        let randomIndex = 1;
+        if(this.activeSequencerIndex == 1)  randomIndex = Math.floor(Math.random() * 2);
 
         // this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${randomIndex + 1}.mp3`;
         this.audio.src = `/assets/music/dynamics/${this.activeSequencerIndex + 1}/${document.getElementById("songSelect").value}.mp3`;
@@ -890,7 +891,7 @@ musicbox.MultiSequencer = function (sequencers) {
         this.audio.playbackRate = document.getElementById("songBPM").value;
 
         const startAndLoopAudio = () => {
-          this.audio.currentTime = 0;
+          this.audio.currentTime = document.getElementById("songCut").value;
           this.audio.play();
       
           // After 30 seconds, stop and restart
