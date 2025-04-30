@@ -43386,7 +43386,7 @@
           n.returnButton.addEventListener("click", function () {
             n.buttonPress("return");
           }),
-          n.container.appendChild(n.toggleButton),
+          //   n.container.appendChild(n.toggleButton),
           n.container.appendChild(n.leftButton),
           n.container.appendChild(n.rightButton),
           n.container.appendChild(n.upButton),
@@ -44474,6 +44474,7 @@
             (t.playButton.id = "play-button"),
             (t.playButton.textContent = "Play"),
             t.playButton.addEventListener("click", function (e) {
+              console.log(t);
               e.preventDefault(),
                 t.toggle(),
                 Ho({
@@ -44693,6 +44694,8 @@
             {
               key: "toggle",
               value: function () {
+                // REMOVE
+                window.temp = this;
                 var t =
                   !(arguments.length > 0 && void 0 !== arguments[0]) ||
                   arguments[0];
@@ -44965,6 +44968,9 @@
             : oc.disableSaveButton(!1);
       }),
       oc.on("save", function () {
+        // REMOVE
+        console.log(sc.midiData.instrument.timeline[0]);
+        window.sc = sc;
         sc.save(), rc.triggerShare();
       }),
       oc.on("stop", function () {
@@ -45032,6 +45038,7 @@
       }),
       document.body.addEventListener("click", function () {
         (ic.recording = !1), (nc.recording = !1);
+        console.log(Vs.instrument.timeline._length);
       });
     var ac = !0;
     document.body.addEventListener("touchstart", function () {

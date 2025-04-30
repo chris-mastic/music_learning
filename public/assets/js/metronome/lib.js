@@ -2631,7 +2631,7 @@ class Needle {
     const now = performance.now();
     const elapsed = (now - this.startTime) / 1000; // in seconds
     const bps = this.temp_bpm / 60; // beats per second
-    const phase = elapsed * bps * Math.PI - Math.PI / 2; // full swing
+    const phase = elapsed * bps * Math.PI + Math.PI / 2; // full swing
 
     let maxAngle = 30;
 
