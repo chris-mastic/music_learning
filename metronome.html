@@ -3,7 +3,10 @@
   <head>
     <title>Metronome</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
 
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,15 +31,27 @@
     <nav class="navbar">
       <button class="nav-btn" onclick="location.href='/'">← Back</button>
       <span class="nav-title">Metronome</span>
-      <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-        <button class="nav-btn" onclick="location.href='/metronome/help'">Help</button>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 20px;
+        "
+      >
+        <button class="nav-btn" onclick="location.href='/metronome/help'">
+          Help
+        </button>
       </div>
-      <div class="delaygroup">
-        <input type="text" id = "setMetronomeDelay" placeholder="Metrnome Delay" />
-      </div>
+      <!-- <div class="delaygroup">
+        <input
+          type="text"
+          id="setMetronomeDelay"
+          placeholder="Metrnome Delay"
+        />
+      </div> -->
     </nav>
-    <div style="display: flex;width: 100%;height: 100%;">
-
+    <div style="display: flex; width: 100%; height: 100%">
       <div class="wave-back">
         <div class="wave-anim">
           <div class="inner-wave-anim">
@@ -54,42 +69,71 @@
             </svg>
             <h1>Beat Changing</h1> -->
           </div>
-      
+
           <!-- Waves SVG -->
           <div>
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 24 150 28" preserveAspectRatio="none">
+            <svg
+              class="waves"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 24 150 28"
+              preserveAspectRatio="none"
+            >
               <defs>
-                <path id="gentle-wave"
+                <path
+                  id="gentle-wave"
                   d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18
-                     58 18 88 18 v44h-352z" />
+                     58 18 88 18 v44h-352z"
+                />
               </defs>
               <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0"   fill="rgba(255,255,255,0.7)" />
-                <use xlink:href="#gentle-wave" x="48" y="3"   fill="rgba(255,255,255,0.5)" />
-                <use xlink:href="#gentle-wave" x="48" y="5"   fill="rgba(255,255,255,0.3)" />
-                <use xlink:href="#gentle-wave" x="48" y="7"   fill="#fff" />
+                <use
+                  xlink:href="#gentle-wave"
+                  x="48"
+                  y="0"
+                  fill="rgba(255,255,255,0.7)"
+                />
+                <use
+                  xlink:href="#gentle-wave"
+                  x="48"
+                  y="3"
+                  fill="rgba(255,255,255,0.5)"
+                />
+                <use
+                  xlink:href="#gentle-wave"
+                  x="48"
+                  y="5"
+                  fill="rgba(255,255,255,0.3)"
+                />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
               </g>
             </svg>
           </div>
         </div>
       </div>
 
-
-
-      <div id="container" style="flex: 1;">
+      <div id="container" style="flex: 1">
         <button id="animMute">
-          <i id="mute-icon1" class="fa-solid fa-face-meh" style="font-size: 17px;"></i>
+          <i
+            id="mute-icon1"
+            class="fa-solid fa-face-meh"
+            style="font-size: 17px"
+          ></i>
           <span id="animmute-text">Freeze</span>
         </button>
+        <button id="bcMute" class="mute-btn">
+          <i
+            id="mute-icon"
+            class="fa-solid fa-volume-xmark"
+            style="font-size: 15px"
+          ></i>
+          <span id="bcmute-text">Mute</span>
+        </button>
       </div>
-      
-      <div id="multi_sequencer" style="flex: 1;">
+
+      <div id="multi_sequencer" style="flex: 1">
         <div class="metronome-vast">
           <div class="metronome-area">
             <div id="main">
-              
-        
               <div class="row">
                 <div id="range">
                   <div id="BPMslider">
@@ -99,13 +143,7 @@
               </div>
               <div class="row">
                 <button id="init"><i class="fa-solid fa-play"></i></button>
-                <div class="button-group">
-                  <button id="bcMute" class="mute-btn">
-                    <i id="mute-icon" class="fa-solid fa-volume-xmark" style="font-size: 17px;"></i>
-                    <span id="bcmute-text">Mute</span>
-                  </button>
-                  
-                </div>
+                <div class="button-group"></div>
                 <select id="tempoSelect" name="tempo">
                   <option value="Largo">Largo</option>
                   <option value="Adagio">Adagio</option>
@@ -117,27 +155,34 @@
                 </select>
                 <div id="tempoDivider"></div>
                 <!-- <img id = "tempo-show" src="/assets/image/metronome/lento.png" alt="tempo_imnage"> -->
-                <div id = "BPMnumber-show">
+                <div id="BPMnumber-show">
                   <h5 id="BPMnumber">80</h5>
-                  <p>&nbsp;</p><h5 style="font-size: 20px;">bpm</h5>
+                  <p>&nbsp;</p>
+                  <h5 style="font-size: 20px">bpm</h5>
                 </div>
               </div>
-        
+
               <canvas id="canvas1" width="600" height="600"></canvas>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <audio id = "bcAudio" src="/assets/music/dynamics/1/5.mp3"></audio>
-    <audio id = "tickAudio" src="/assets/music/metronome/tick.mp3"></audio>
-    
+
+    <audio id="bcAudio" src="/assets/music/dynamics/1/5.mp3"></audio>
+    <audio id="tickAudio" src="/assets/music/metronome/tick.mp3"></audio>
+
     <!--<div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>-->
 
-    <script src="/assets/js/metronome/Tone.min.js" type="text/javascript"></script>
-    <script src="/assets/js/metronome/third-party.js" type="text/javascript"></script>
+    <script
+      src="/assets/js/metronome/Tone.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="/assets/js/metronome/third-party.js"
+      type="text/javascript"
+    ></script>
     <script src="/assets/js/metronome/lib.js" type="text/javascript"></script>
     <script src="/assets/js/metronome/main.js" type="text/javascript"></script>
     <!-- <script src="/assets/js/metronome/metronome.js" type="text/javascript"></script> -->
