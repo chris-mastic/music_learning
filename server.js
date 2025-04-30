@@ -1,26 +1,30 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 const app = express();
 
 app.use(cors()); // This will allow all origins
 // Serve the index.html file when the root URL is accessed
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get('/dynamics', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dynamics.html'));
+app.get("/dynamics", (req, res) => {
+  res.sendFile(path.join(__dirname, "dynamics.html"));
 });
-app.get('/dynamics/help', (req, res) => {
-  res.sendFile(path.join(__dirname, 'help/dynamics_help.html'));
+app.get("/dynamics/help", (req, res) => {
+  res.sendFile(path.join(__dirname, "help/dynamics_help.html"));
 });
 
-app.get('/metronome', (req, res) => {
-  res.sendFile(path.join(__dirname, 'metronome.html'));
+app.get("/metronome", (req, res) => {
+  res.sendFile(path.join(__dirname, "metronome.html"));
+});
+
+app.get("/songmaker", (req, res) => {
+  res.sendFile(path.join(__dirname, "songmaker.html"));
 });
 
 // Set the port to listen on
