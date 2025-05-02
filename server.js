@@ -23,8 +23,8 @@ app.get("/metronome", (req, res) => {
   res.sendFile(path.join(__dirname, "metronome.html"));
 });
 
-app.get("/songmaker", (req, res) => {
-  res.sendFile(path.join(__dirname, "songmaker.html"));
+app.get("/composite", (req, res) => {
+  res.sendFile(path.join(__dirname, "composite.html"));
 });
 
 // Set the port to listen on

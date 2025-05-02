@@ -24,7 +24,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
 }
 input {
@@ -34,7 +34,7 @@ input {
   -ms-user-select: default;
   user-select: default;
 }
-.delaygroup{
+.delaygroup {
   position: absolute;
   top: 100px;
   left: 200px;
@@ -50,7 +50,7 @@ input {
 }
 #container canvas {
   position: absolute;
-  margin-top:10%;
+  margin-top: 10%;
   width: 70%;
 }
 #about,
@@ -81,7 +81,11 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background: linear-gradient(60deg, rgb(72, 49, 163) 0%, rgb(1, 137, 155) 100%);
+  background: linear-gradient(
+    60deg,
+    rgb(72, 49, 163) 0%,
+    rgb(1, 137, 155) 100%
+  );
   box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
   position: sticky;
@@ -123,7 +127,7 @@ input {
   }
 }
 
-.multi_sequencer{
+.multi_sequencer {
   position: relative;
   flex: 1;
   display: flex;
@@ -451,4 +455,3 @@ input {
   -ms-transform: scale(1);
   transform: scale(1);
 }
-
