@@ -1,5 +1,5 @@
 const numColumns = 20;
-const buttonNote = ["do", "ti", "la", "sol", "fa", "mi", "re", "do"];
+const buttonNote = ["Do", "Ti", "La", "Sol", "Fa", "Mi", "Re", "Do"];
 
 const gridContainer = document.getElementById("noteGroup");
 
@@ -45,18 +45,31 @@ const stave = new VF.Stave(10, 40, 400);
 stave.addClef("treble").addTimeSignature("4/4");
 stave.setContext(context).draw();
 
-// Define the notes for "Do, Re, Mi, Fa"
-const notes = [
-  new VF.Note({ keys: ["c/4"], duration: "q" }), // Do (C)
-  new VF.Note({ keys: ["d/4"], duration: "q" }), // Re (D)
-  new VF.Note({ keys: ["e/4"], duration: "q" }), // Mi (E)
-  new VF.Note({ keys: ["f/4"], duration: "q" }), // Fa (F)
+var notes = [
+  // A quarter-note C.
+  new VF.StaveNote({ clef: "treble", keys: ["c/4"], duration: "q" }),
+
+  // A quarter-note D.
+  new VF.StaveNote({ clef: "treble", keys: ["d/4"], duration: "q" }),
+
+  // A quarter-note rest. Note that the key (b/4) specifies the vertical
+  // position of the rest.
+  new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
+
+  // A C-Major chord.
+  new VF.StaveNote({
+    clef: "treble",
+    keys: ["c/4", "e/4", "g/4"],
+    duration: "q",
+  }),
 ];
 
-// Create a voice in 4/4 time
-const voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+// Create a voice in 4/4 and add above notes
+var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 voice.addTickables(notes);
 
-// Format and draw the voice
-new VF.Formatter().joinVoices([voice]).format([voice], 300);
+// Format and justify the notes to 400 pixels.
+var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
+
+// Render voice
 voice.draw(context, stave);
