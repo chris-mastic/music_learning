@@ -117,8 +117,8 @@ input {
 .note-group {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  grid-gap: 10px;
-  width: 80%;
+  grid-gap: 3px;
+  width: 85%;
   height: 100%;
   padding: 10px;
 }
@@ -141,9 +141,17 @@ input {
 }
 
 .grid-btn.selected {
-  background-color: #ffcc00;
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  /* background-color: #ffcc00; */
+  transform: scale(1.01);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.oddBtn {
+  background-color: #5dc6fe;
+}
+
+.evenBtn {
+  background-color: #2cb5ff;
 }
 
 .music-sheet {
