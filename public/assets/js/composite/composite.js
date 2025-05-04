@@ -92,6 +92,28 @@ const stave = new VF.Stave(10, 20, 160);
 stave.addClef("treble").addTimeSignature("4/4");
 stave.setContext(context).draw();
 
+var notes = [
+  // A quarter-note C.
+  new VF.StaveNote({ clef: "treble", keys: ["a/4"], duration: "q" }),
+  new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
+  new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
+  new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
+  // new VF.StaveNote({
+  //   clef: "treble",
+  //   keys: ["c/4", "e/4", "g/4"],
+  //   duration: "q",
+  // }),
+];
+
+var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+voice.addTickables(notes);
+
+// Format and justify the notes to 400 pixels.
+var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 85);
+
+// Render voice
+voice.draw(context, stave);
+
 for (let i = 1; i < 8; i++) {
   let stave1 = new VF.Stave(stave.width * i + stave.x, 20, 160);
   stave1.setContext(context).draw();
@@ -99,6 +121,8 @@ for (let i = 1; i < 8; i++) {
   var notes = [
     // A quarter-note C.
     new VF.StaveNote({ clef: "treble", keys: ["a/4"], duration: "q" }),
+    new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
+    new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
     new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
     // new VF.StaveNote({
     //   clef: "treble",
@@ -117,11 +141,11 @@ for (let i = 1; i < 8; i++) {
   // console.log(noteGroup);
 
   // // Create a voice in 4/4 and add above notes
-  var voice = new VF.Voice({ num_beats: 2, beat_value: 4 });
+  var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
   voice.addTickables(notes);
 
   // Format and justify the notes to 400 pixels.
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 200);
+  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 140);
 
   // Render voice
   voice.draw(context, stave1);
